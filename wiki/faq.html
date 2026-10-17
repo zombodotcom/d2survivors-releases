@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ and troubleshooting - D2 Survivors wiki</title>
+<meta name="description" content="Steam, check_d2r.bat, the Windows warning, perf.log, video memory and updating.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="wiki.css">
+</head>
+<body data-page="text">
+<main>
+<h1>FAQ and troubleshooting</h1>
+<p class="lead">Most problems are the game not finding D2R, or the graphics card. The files below tell what went wrong.</p>
+<h2 id="need">What do I need?</h2>
+<ul class="plain"><li>Windows 10 or 11.</li><li>Diablo II: Resurrected installed, from Battle.net or Steam. The game draws its art and sound from your install.</li><li>A graphics card with 4 GB of video memory or more.</li></ul>
+<h2 id="d2r">Does it start D2R or Battle.net?</h2>
+<p>No. It only reads D2R's files from its folder. It never starts D2R, its launcher or Battle.net, and it ships no Blizzard files.</p>
+<h2 id="notfound">The launcher says D2R isn't found</h2>
+<p>Press <b>Auto-detect</b>, or <b>Browse...</b> to D2R's folder: the one with D2R's <code>.build.info</code> file, or on Steam its <code>Data</code> folder with <code>.build.config</code> inside. For example:</p>
+<ul class="plain"><li><code>C:\Program Files (x86)\Diablo II Resurrected</code> (Battle.net)</li><li><code>C:\Program Files (x86)\Steam\steamapps\common\Diablo II Resurrected</code> (Steam)</li></ul>
+<p>Unzip D2 Survivors anywhere except inside D2R's folder.</p>
+<h2 id="steam">Steam edition, and check_d2r.bat</h2>
+<p>The Steam edition works too. It stores its files differently (no <code>.build.info</code>; a <code>Data</code> folder of numbered <code>.data</code> files), and the game reads both.</p>
+<p>If the launcher or the game says D2R isn't found, or the game can't load D2R's files, run <code>check_d2r.bat</code>. Drag D2R's folder onto it if D2R is somewhere unusual. It only reads D2R's files, says whether they load, and saves what it found in <code>d2r_check.txt</code>. Send that file back.</p>
+<h2 id="smartscreen">Windows warns about an unknown app</h2>
+<p>The first time, Windows may say it protected your PC. Click <b>More info</b>, then <b>Run anyway</b>. The game isn't signed, so Windows doesn't know it yet.</p>
+<h2 id="update">Updating</h2>
+<p>The launcher checks for a new build each time it starts, and shows its own build in the top right corner. When there is one, a bar says <b>Update available</b>: press <b>Update</b>, and it downloads the build, swaps its files and restarts. Close the game first.</p>
+<p>Or download the new zip and unzip it over the folder. Either way your settings, progress, logs and spell review marks are kept.</p>
+<h2 id="perf">It runs slowly: perf.log</h2>
+<p>Turn on <b>Show performance</b> in the options, or press <kbd>F3</kbd> in a run. The game then writes <code>perf.log</code> beside the exe: frame times and video memory, a line each second. Try lower settings in the launcher, and send <code>perf.log</code> with <code>log.txt</code> if it stays slow.</p>
+<h2 id="vram">Video memory</h2>
+<p>The game needs a graphics card with 4 GB or more; at the top settings it uses about 2 GB. If the card runs short, lower the settings in the launcher. <code>perf.log</code> shows how much video memory is in use.</p>
+<h2 id="crash">The game crashed</h2>
+<p>It writes what went wrong to <code>crash.txt</code> beside the exe. Run <code>play.bat</code> to see the console as well. Send <code>log.txt</code>, <code>perf.log</code> and <code>crash.txt</code>.</p>
+<h2 id="files">Files beside the exe</h2>
+<div class="tw"><table><tbody>
+<tr><td class="nw"><code>settings.toml</code></td><td>Your settings</td></tr>
+<tr><td class="nw"><code>progress.toml</code></td><td>Shards, talents, Armory, acts reached</td></tr>
+<tr><td class="nw"><code>log.txt</code></td><td>The game's log</td></tr>
+<tr><td class="nw"><code>perf.log</code></td><td>Frame times and video memory (with Show performance on)</td></tr>
+<tr><td class="nw"><code>spell_review.txt</code></td><td>Spell review marks</td></tr>
+<tr><td class="nw"><code>crash.txt</code></td><td>What went wrong, if the game crashed</td></tr>
+<tr><td class="nw"><code>d2r_check.txt</code></td><td>What <code>check_d2r.bat</code> found</td></tr>
+</tbody></table></div>
+</main>
+<script src="wiki.js"></script>
+</body>
+</html>

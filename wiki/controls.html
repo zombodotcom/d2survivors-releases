@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Controls - D2 Survivors wiki</title>
+<meta name="description" content="Keyboard and gamepad controls for D2 Survivors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="wiki.css">
+</head>
+<body data-page="text">
+<main>
+<h1>Controls</h1>
+<p class="lead">You only move: skills cast themselves. Keyboard and gamepad work at the same time.</p>
+<h2 id="keyboard">In a run</h2>
+<div class="tw"><table><thead><tr><th>Keyboard</th><th>Gamepad</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows</td><td>Left stick, D-pad</td><td>Move</td></tr>
+<tr><td><kbd>1</kbd>-<kbd>4</kbd> or click</td><td></td><td>Pick a level-up card</td></tr>
+<tr><td><kbd>R</kbd></td><td>RB</td><td>Deal the cards again (reroll), if you have rerolls</td></tr>
+<tr><td><kbd>C</kbd></td><td>Select</td><td>Character sheet</td></tr>
+<tr><td><kbd>T</kbd> / <kbd>I</kbd></td><td>Y / X</td><td>Talents / Armory (class screen, Esc menu)</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Start</td><td>Pause menu and options</td></tr>
+<tr><td><kbd>Tab</kbd></td><td>LB</td><td>Minimap</td></tr>
+<tr><td><kbd>N</kbd></td><td></td><td>Damage numbers on or off</td></tr>
+<tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>RT / LT</td><td>Zoom</td></tr>
+<tr><td><kbd>M</kbd></td><td></td><td>Mute</td></tr>
+<tr><td><kbd>F3</kbd></td><td></td><td>Performance lines on screen</td></tr>
+</tbody></table></div>
+<h2 id="review">Spell review (spells.bat)</h2>
+<p>The hero casts each skill over and over at a few dummies. Mark whether it looks right, as in Diablo (effect, animation, sound). Every mark is saved at once to <code>spell_review.txt</code> beside the exe; the next review starts at the first skill not yet marked. The file holds only the class, the skill, OK or WRONG and your note.</p>
+<div class="tw"><table><thead><tr><th>Keyboard</th><th>Gamepad</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>Y</kbd></td><td>A</td><td>Looks right</td></tr>
+<tr><td><kbd>N</kbd></td><td>B</td><td>Looks wrong: type what is off, then Enter (Esc: no note)</td></tr>
+<tr><td><kbd>Right</kbd> / <kbd>Left</kbd></td><td></td><td>Next / previous skill</td></tr>
+<tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>RB / LB</td><td>Next / previous class</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Start</td><td>Quit</td></tr>
+</tbody></table></div>
+<h2 id="bats">The .bat files</h2>
+<div class="tw"><table><tbody>
+<tr><td class="nw"><code>play.bat</code></td><td>Starts the game with a console window. If something goes wrong, the console shows why.</td></tr>
+<tr><td class="nw"><code>clips.bat</code></td><td>A run for recording: no death, a big horde, big spells.</td></tr>
+<tr><td class="nw"><code>spells.bat</code></td><td>The spell review, above.</td></tr>
+<tr><td class="nw"><code>check_d2r.bat</code></td><td>Checks the game can read your D2R install; writes <code>d2r_check.txt</code>. See the <a href="faq.html#steam">FAQ</a>.</td></tr>
+</tbody></table></div>
+</main>
+<script src="wiki.js"></script>
+</body>
+</html>
