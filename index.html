@@ -36,6 +36,11 @@
   li { margin: 4px 0; }
   code { background: #221b14; padding: 1px 6px; border-radius: 3px; font-size: 14px; }
   footer { color: var(--dim); font-size: 13px; text-align: center; padding: 48px 0 32px; }
+  .log { list-style: none; padding: 0; }
+  .log > li { border-left: 2px solid var(--line); padding: 0 0 16px 16px; margin: 0; }
+  .log h3 { font: 600 16px Inter, sans-serif; color: var(--gold); margin: 0 0 4px; }
+  .log h3 span { color: var(--dim); font-weight: 400; font-size: 13px; margin-left: 8px; }
+  .log ul { margin: 0; }
   @media (max-width: 700px) { .shots, .cols { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -54,6 +59,18 @@
   <div class="shots">
     <img src="img/diablo.jpg" alt="Diablo's fire nova ring">
     <img src="img/act1.jpg" alt="A crowd of Fallen in act 1">
+  </div>
+
+  <h2>About</h2>
+  <div class="card">
+    <p>D2 Survivors is a Vampire Survivors / Megabonk style game made from Diablo II. Pick one of
+      Diablo II's classes and a build (Blizzard Sorc, Javazon, Hammerdin, Trapsin, Windy Druid and more).
+      Your skills cast themselves at the horde; you move, dodge, and choose a level-up card each level
+      to learn or raise a skill or a passive. Each act's monsters grow in waves, D2's super-uniques show up
+      before the boss, and night falls just before the boss arrives: Andariel, Duriel, Mephisto, Diablo, Baal.</p>
+    <p>Everything you see and hear is loaded at run time from your own Diablo II: Resurrected install:
+      its 3D models and animations, its PopcornFX spell effects, its shaders and its sounds.
+      The game is written from scratch in Rust; it ships no Blizzard files.</p>
   </div>
 
   <h2>What's in it</h2>
@@ -84,6 +101,39 @@
       If the game can't read D2R, run <code>check_d2r.bat</code> and send the <code>d2r_check.txt</code> it writes.</p>
   </div>
 
+  <h2>Updating</h2>
+  <div class="card">
+    <p>Download the newest zip and unzip it over your old folder (or into a new one and copy
+      <code>settings.toml</code> and <code>progress.toml</code> across): your settings, shards, talents and Armory are kept.
+      Each build's changes are below.</p>
+  </div>
+
+  <h2>Updates and fixes</h2>
+  <ul class="log" id="log">
+    <li><h3>build-2026-10-17f<span>17 Oct 2026</span></h3><ul>
+      <li>Monsters no longer leave floating blood smears (hit flashes and boss deaths stay).</li></ul></li>
+    <li><h3>build-2026-10-17e<span>17 Oct 2026</span></h3><ul>
+      <li>Steam's D2R works: the game reads Steam's own storage format, and finds Steam installs on any drive.</li>
+      <li><code>check_d2r.bat</code> checks the game can read your D2R and writes <code>d2r_check.txt</code>.</li></ul></li>
+    <li><h3>build-2026-10-17d<span>17 Oct 2026</span></h3><ul>
+      <li>Diablo casts all his skills properly: Red Lightning Hose, cold, fire nova ring, fire wall, run, bone prison, each with its D2R animation, effect and sound. Chill only slows his casts.</li>
+      <li>Damage numbers on/off in Esc &gt; Options, or N during play.</li>
+      <li><code>README.txt</code> for players in the zip.</li></ul></li>
+    <li><h3>build-2026-10-17b<span>17 Oct 2026</span></h3><ul>
+      <li>Dusk and dawn no longer stall the game; the act change loads more smoothly.</li>
+      <li>Pause menu and card screens hold still (no sideways skipping) and pause sounds.</li>
+      <li><code>perf.log</code> names what a slow frame spent its time on.</li></ul></li>
+    <li><h3>build-2026-10-17a<span>17 Oct 2026</span></h3><ul>
+      <li>Spell review (<code>spells.bat</code>): mark each skill as looking right or wrong.</li>
+      <li>Melee rework: every melee skill auto-swings and hits everything in its arc, line or ring. 26 new melee skills and builds: Spearazon, Zealot, Phoenix/Kicksin, Fury Druid, Frenzy Barb, Cleave Warlock.</li>
+      <li>Damage numbers and a minimap (Tab / LB).</li>
+      <li>Faster big fights (particles built on all cores), VSync without tearing.</li></ul></li>
+    <li><h3>build-2026-10-16h<span>16 Oct 2026</span></h3><ul>
+      <li>Much less video memory (act 2 about 2.1 GB, was over 3) with no quality change.</li>
+      <li>F3 performance overlay and <code>perf.log</code>.</li>
+      <li>All 8 class cards fit on screen; Firestorm, Nova, Lightning, Fire Wall, Ice Blast and arrow visuals fixed.</li></ul></li>
+  </ul>
+
   <footer>
     <a href="https://github.com/zombodotcom/d2survivors-releases/releases">All releases</a><br><br>
     A fan project, not affiliated with or endorsed by Blizzard Entertainment.
@@ -98,6 +148,25 @@
       const a = (j.assets || []).find(a => a.name.endsWith(".zip"));
       const mb = a ? " · " + Math.round(a.size / 1048576) + " MB" : "";
       document.getElementById("ver").textContent = j.tag_name + mb;
+    })
+    .catch(() => {});
+  // Builds published after this page was written: newest first, above the list.
+  const known = new Set([...document.querySelectorAll("#log h3")].map(h => h.firstChild.textContent));
+  const esc = t => t.replace(/[&<>]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
+  fetch("https://api.github.com/repos/zombodotcom/d2survivors-releases/releases?per_page=20")
+    .then(r => r.ok ? r.json() : [])
+    .then(list => {
+      const log = document.getElementById("log");
+      list.filter(r => !known.has(r.tag_name)).reverse().forEach(r => {
+        const items = (r.body || "").split("
+").filter(l => /^\s*[-*] /.test(l))
+          .map(l => "<li>" + esc(l.replace(/^\s*[-*] /, "")).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+            .replace(/`(.+?)`/g, "<code>$1</code>") + "</li>").join("");
+        const date = new Date(r.published_at).toLocaleDateString("en-GB", {day: "numeric", month: "short", year: "numeric"});
+        const li = document.createElement("li");
+        li.innerHTML = "<h3>" + esc(r.tag_name) + "<span>" + date + "</span></h3><ul>" + items + "</ul>";
+        log.prepend(li);
+      });
     })
     .catch(() => {});
 </script>
