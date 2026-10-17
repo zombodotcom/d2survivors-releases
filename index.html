@@ -87,7 +87,10 @@
   /* classes */
   .cls { display: block; text-decoration: none; color: inherit; overflow: hidden; transition: transform .15s, border-color .15s; }
   .cls:hover { transform: translateY(-3px); border-color: var(--line2); }
-  .cls .pic { aspect-ratio: 4/3; background: #000 center/cover; border-bottom: 1px solid var(--line); }
+  .cls .pic { aspect-ratio: 420/507; background: radial-gradient(ellipse 70% 55% at 50% 58%, #2a1f14 0%, #120e0a 60%, #050504 100%);
+    border-bottom: 1px solid var(--line); overflow: hidden; }
+  .cls .pic img { display: block; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: lighten; }
+  @media (max-width: 560px) { .cls .pic { aspect-ratio: auto; height: min(480px, 115vw); } }
   .cls .body { padding: 12px 14px 14px; }
   .cls h3 { margin: 0 0 8px; font: 700 17px Cinzel, serif; color: var(--gold2); }
   .chips { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -201,14 +204,14 @@
   <h2>Eight classes</h2>
   <p class="sub">Every D2R class, Warlock included, each with builds from today's tier lists.</p>
   <div class="grid g4">
-    <a class="frame cls" href="wiki/sor.html"><div class="pic" style="background-image:url(img/cls/sor.jpg)"></div><div class="body"><h3>Sorceress</h3><div class="chips"><span class="chip">Blizzard</span><span class="chip">Fire</span><span class="chip">Lightning</span></div></div></a>
-    <a class="frame cls" href="wiki/ama.html"><div class="pic" style="background-image:url(img/cls/ama.jpg)"></div><div class="body"><h3>Amazon</h3><div class="chips"><span class="chip">Javazon</span><span class="chip">Bowazon</span><span class="chip">Spearazon</span></div></div></a>
-    <a class="frame cls" href="wiki/nec.html"><div class="pic" style="background-image:url(img/cls/nec.jpg)"></div><div class="body"><h3>Necromancer</h3><div class="chips"><span class="chip">Bone</span><span class="chip">Poison</span><span class="chip">Summoner</span></div></div></a>
-    <a class="frame cls" href="wiki/pal.html"><div class="pic" style="background-image:url(img/cls/pal.jpg)"></div><div class="body"><h3>Paladin</h3><div class="chips"><span class="chip">Hammerdin</span><span class="chip">FoH</span><span class="chip">Zealot</span></div></div></a>
-    <a class="frame cls" href="wiki/ass.html"><div class="pic" style="background-image:url(img/cls/ass.jpg)"></div><div class="body"><h3>Assassin</h3><div class="chips"><span class="chip">Trapsin</span><span class="chip">Phoenix Strike</span><span class="chip">Kicksin</span></div></div></a>
-    <a class="frame cls" href="wiki/dru.html"><div class="pic" style="background-image:url(img/cls/dru.jpg)"></div><div class="body"><h3>Druid</h3><div class="chips"><span class="chip">Windy</span><span class="chip">Fire</span><span class="chip">Fury</span></div></div></a>
-    <a class="frame cls" href="wiki/bar.html"><div class="pic" style="background-image:url(img/cls/bar.jpg)"></div><div class="body"><h3>Barbarian</h3><div class="chips"><span class="chip">Whirlwind</span><span class="chip">Warcry</span><span class="chip">Frenzy</span></div></div></a>
-    <a class="frame cls" href="wiki/war.html"><div class="pic" style="background-image:url(img/cls/war.jpg)"></div><div class="body"><h3>Warlock</h3><div class="chips"><span class="chip">Echoing Strike</span><span class="chip">Fire</span><span class="chip">Demon</span><span class="chip">Cleave</span></div></div></a>
+    <a class="frame cls" href="wiki/sor.html"><div class="pic"><picture><source srcset="img/cls/sor-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/sor.webp" alt="Sorceress" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Sorceress</h3><div class="chips"><span class="chip">Blizzard</span><span class="chip">Fire</span><span class="chip">Lightning</span></div></div></a>
+    <a class="frame cls" href="wiki/ama.html"><div class="pic"><picture><source srcset="img/cls/ama-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/ama.webp" alt="Amazon" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Amazon</h3><div class="chips"><span class="chip">Javazon</span><span class="chip">Bowazon</span><span class="chip">Spearazon</span></div></div></a>
+    <a class="frame cls" href="wiki/nec.html"><div class="pic"><picture><source srcset="img/cls/nec-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/nec.webp" alt="Necromancer" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Necromancer</h3><div class="chips"><span class="chip">Bone</span><span class="chip">Poison</span><span class="chip">Summoner</span></div></div></a>
+    <a class="frame cls" href="wiki/pal.html"><div class="pic"><picture><source srcset="img/cls/pal-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/pal.webp" alt="Paladin" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Paladin</h3><div class="chips"><span class="chip">Hammerdin</span><span class="chip">FoH</span><span class="chip">Zealot</span></div></div></a>
+    <a class="frame cls" href="wiki/ass.html"><div class="pic"><picture><source srcset="img/cls/ass-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/ass.webp" alt="Assassin" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Assassin</h3><div class="chips"><span class="chip">Trapsin</span><span class="chip">Phoenix Strike</span><span class="chip">Kicksin</span></div></div></a>
+    <a class="frame cls" href="wiki/dru.html"><div class="pic"><picture><source srcset="img/cls/dru-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/dru.webp" alt="Druid" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Druid</h3><div class="chips"><span class="chip">Windy</span><span class="chip">Fire</span><span class="chip">Fury</span></div></div></a>
+    <a class="frame cls" href="wiki/bar.html"><div class="pic"><picture><source srcset="img/cls/bar-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/bar.webp" alt="Barbarian" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Barbarian</h3><div class="chips"><span class="chip">Whirlwind</span><span class="chip">Warcry</span><span class="chip">Frenzy</span></div></div></a>
+    <a class="frame cls" href="wiki/war.html"><div class="pic"><picture><source srcset="img/cls/war-still.jpg" media="(prefers-reduced-motion: reduce)"><img src="img/cls/war.webp" alt="Warlock" width="420" height="507" loading="lazy" decoding="async"></picture></div><div class="body"><h3>Warlock</h3><div class="chips"><span class="chip">Echoing Strike</span><span class="chip">Fire</span><span class="chip">Demon</span><span class="chip">Cleave</span></div></div></a>
   </div>
 </section>
 
