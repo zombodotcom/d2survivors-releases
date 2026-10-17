@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2 Survivors</title>
+<meta name="description" content="A survivors-like in 3D with Diablo II's classes, skills and monsters, drawn from your own Diablo II: Resurrected install.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0b09; --panel: #17130f; --line: #3a2f22; --text: #d8cdb8;
+    --dim: #9a8d78; --gold: #c9a35a; --red: #b3261e;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 Inter, system-ui, sans-serif; }
+  a { color: var(--gold); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 56px 0 24px; text-align: center; }
+  h1 { font: 800 clamp(40px, 8vw, 72px)/1 Cinzel, serif; color: var(--gold);
+    margin: 0 0 12px; letter-spacing: 2px; text-shadow: 0 2px 24px #000; }
+  .tag { color: var(--dim); max-width: 640px; margin: 0 auto 28px; }
+  .btn { display: inline-block; padding: 14px 32px; border: 1px solid var(--gold);
+    background: linear-gradient(#3b1410, #200907); color: #f0dfb8; text-decoration: none;
+    font: 600 18px Cinzel, serif; letter-spacing: 1px; border-radius: 3px; }
+  .btn:hover { background: linear-gradient(#55201a, #2c0d0a); }
+  .ver { display: block; margin-top: 10px; color: var(--dim); font-size: 13px; }
+  .hero { width: 100%; border: 1px solid var(--line); border-radius: 4px; display: block; }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .shots img { width: 100%; border: 1px solid var(--line); border-radius: 4px; display: block; }
+  h2 { font: 600 24px Cinzel, serif; color: var(--gold); margin: 48px 0 12px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 16px 20px; }
+  ul, ol { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  code { background: #221b14; padding: 1px 6px; border-radius: 3px; font-size: 14px; }
+  footer { color: var(--dim); font-size: 13px; text-align: center; padding: 48px 0 32px; }
+  @media (max-width: 700px) { .shots, .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>D2 Survivors</h1>
+    <p class="tag">A survivors-like in 3D with Diablo II's classes, skills and monsters,
+      drawn with Diablo II: Resurrected's own models, spell effects and sounds.
+      Skills cast themselves; you move, pick upgrades, and survive five acts to Baal.</p>
+    <a class="btn" href="https://github.com/zombodotcom/d2survivors-releases/releases/latest/download/d2survivors.zip">Download for Windows</a>
+    <span class="ver" id="ver">latest build</span>
+  </header>
+
+  <img class="hero" src="img/horde.jpg" alt="A victory screen over a horde of monsters in act 5">
+  <div class="shots">
+    <img src="img/diablo.jpg" alt="Diablo's fire nova ring">
+    <img src="img/act1.jpg" alt="A crowd of Fallen in act 1">
+  </div>
+
+  <h2>What's in it</h2>
+  <div class="cols">
+    <div class="card"><ul>
+      <li>Eight classes: Amazon, Assassin, Barbarian, Druid, Necromancer, Paladin, Sorceress and the Warlock, each with builds</li>
+      <li>Five acts with their own ground, music, super-uniques and bosses, up to Baal, then Endless</li>
+      <li>Level-up cards, gold, chests, D2's shrines</li>
+    </ul></div>
+    <div class="card"><ul>
+      <li>Shards and a talent tree per class between runs</li>
+      <li>The Armory: boss-dropped uniques and set items, worn on your hero</li>
+      <li>D2R's 3D models, PopcornFX spell effects and shaders</li>
+    </ul></div>
+  </div>
+
+  <h2>Getting started</h2>
+  <div class="card">
+    <p>You need Windows 10 or 11, <b>Diablo II: Resurrected installed</b> (Battle.net or Steam)
+      and a graphics card with 4 GB or more. The game reads its art from your D2R install and
+      ships no Blizzard files. It never starts D2R or Battle.net.</p>
+    <ol>
+      <li>Download the zip and unzip it anywhere.</li>
+      <li>Run <code>D2SurvivorsLauncher.exe</code>. It finds D2R by itself; if not, point it at D2R's folder.</li>
+      <li>Press Play. <code>README.txt</code> in the zip has the controls.</li>
+    </ol>
+    <p>Windows may warn about an unknown app the first time: <i>More info</i>, then <i>Run anyway</i>.
+      If the game can't read D2R, run <code>check_d2r.bat</code> and send the <code>d2r_check.txt</code> it writes.</p>
+  </div>
+
+  <footer>
+    <a href="https://github.com/zombodotcom/d2survivors-releases/releases">All releases</a><br><br>
+    A fan project, not affiliated with or endorsed by Blizzard Entertainment.
+    Diablo and Diablo II: Resurrected are trademarks or registered trademarks of Blizzard Entertainment, Inc.
+  </footer>
+</div>
+<script>
+  fetch("https://api.github.com/repos/zombodotcom/d2survivors-releases/releases/latest")
+    .then(r => r.ok ? r.json() : null)
+    .then(j => {
+      if (!j) return;
+      const a = (j.assets || []).find(a => a.name.endsWith(".zip"));
+      const mb = a ? " · " + Math.round(a.size / 1048576) + " MB" : "";
+      document.getElementById("ver").textContent = j.tag_name + mb;
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
