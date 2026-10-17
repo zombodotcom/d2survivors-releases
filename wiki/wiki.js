@@ -309,7 +309,7 @@
       '<div class="grid g4" style="margin-bottom:8px">' +
       CLASSES.map(function (c) {
         return '<a class="frame box" style="text-decoration:none;padding:0;overflow:hidden" href="' + c[0] + '.html">' +
-          '<div style="aspect-ratio:4/3;background:#000 url(../img/cls/' + c[0] + '.jpg) center/cover;border-bottom:1px solid var(--line)"></div>' +
+          '<img class="cpic" loading="lazy" alt="' + c[1] + '" src="../img/cls/' + c[0] + '.webp">' +
           '<div style="padding:8px 12px;font:700 16px Cinzel,serif;color:var(--gold2)">' + c[1] + '</div></a>';
       }).join('') + '</div>' +
 
@@ -366,7 +366,7 @@
     var skills = d.skills.filter(function (s) { return s.class === code; });
     skills.sort(function (a, b) { return a.req_level - b.req_level || c.skills.indexOf(a.name) - c.skills.indexOf(b.name); });
     var passives = skills.filter(function (s) { return s.kind === 'passive' || s.kind === 'aura'; });
-    var h = '<div class="hero"><div class="pic" style="background-image:url(../img/cls/' + code + '.jpg)"></div><div>' +
+    var h = '<div class="hero"><img class="pic" alt="' + esc(c.name) + '" src="../img/cls/' + code + '.webp"><div>' +
       '<h1>' + esc(c.name) + '</h1>' +
       '<div class="stats"><div><b>' + c.life + '</b>life at level 1</div><div><b>+' + c.life_per_level + '</b>life per level</div>' +
       '<div><b>' + skills.length + '</b>skills</div><div><b>' + (c.builds.length - 1) + '</b>builds</div></div>' +

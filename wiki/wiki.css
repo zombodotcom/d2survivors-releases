@@ -118,8 +118,9 @@ td.nw { white-space: nowrap; }
 
 /* class page */
 .hero { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 20px; align-items: start; margin-bottom: 8px; }
-.hero .pic { aspect-ratio: 4/3; background: #000 center/cover; border-radius: 4px; border: 1px solid var(--line); }
-@media (max-width: 700px) { .hero { grid-template-columns: 1fr; } }
+.hero .pic { display: block; width: 100%; aspect-ratio: 420/507; object-fit: contain; background: radial-gradient(ellipse at 50% 60%, #2a1a10, #070605 70%); border-radius: 4px; border: 1px solid var(--line); }
+.cpic { display: block; width: 100%; aspect-ratio: 420/507; object-fit: contain; background: radial-gradient(ellipse at 50% 60%, #2a1a10, #070605 70%); border-bottom: 1px solid var(--line); }
+@media (max-width: 700px) { .hero { grid-template-columns: 1fr; } .hero .pic { max-height: 420px; } }
 .stats { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 10px 0; }
 .stats div { font-size: 14px; } .stats b { color: var(--gold2); font: 700 18px Cinzel, serif; margin-right: 4px; }
 .build h3 { margin-bottom: 4px; }
