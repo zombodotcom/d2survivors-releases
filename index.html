@@ -158,8 +158,7 @@
     .then(list => {
       const log = document.getElementById("log");
       list.filter(r => !known.has(r.tag_name)).reverse().forEach(r => {
-        const items = (r.body || "").split("
-").filter(l => /^\s*[-*] /.test(l))
+        const items = (r.body || "").split(/\r?\n/).filter(l => /^\s*[-*] /.test(l))
           .map(l => "<li>" + esc(l.replace(/^\s*[-*] /, "")).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
             .replace(/`(.+?)`/g, "<code>$1</code>") + "</li>").join("");
         const date = new Date(r.published_at).toLocaleDateString("en-GB", {day: "numeric", month: "short", year: "numeric"});
