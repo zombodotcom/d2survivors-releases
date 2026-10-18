@@ -359,6 +359,16 @@
       'An event comes every ' + r.ambush_endless_every + ' seconds, and super-uniques come ' + r.super_endless_first + ' seconds in, then once every ' + r.super_endless_every + ' seconds.</p>';
   };
 
+  // Gameplay clips shown on class pages (files in ../clips/).
+  var CLIPS = {
+    sor: ['sorceress', 'Frozen Orb, Blizzard and Static Field against a 450-monster horde.'],
+    pal: ['paladin', 'A Hammerdin: Blessed Hammers spiral out under Concentration.'],
+    nec: ['necromancer', 'Bone Spear, Teeth and Corpse Explosion in Act III.'],
+    dru: ['druid', 'Tornado and Hurricane in Act IV.'],
+    ama: ['amazon', 'Multiple Shot and Strafe into a swarm in Act I.'],
+    bar: ['barbarian', 'Whirlwind and Battle Orders in an Act V horde.']
+  };
+
   R.cls = function (d, m) {
     var code = document.body.getAttribute('data-class');
     var c = d.classes.filter(function (x) { return x.code === code; })[0];
@@ -374,6 +384,13 @@
       'Starts with <b>' + esc(c.first_skill) + '</b> in "All Skills"; each build names its own starting skill.</p>' +
       '<div class="chips">' + skills.map(function (s) { return chip(s.name, '', '#skill-' + slug(s.name)); }).join('') + '</div>' +
       '</div></div>';
+
+    var clip = CLIPS[code];
+    if (clip) {
+      h += '<figure class="frame clip"><video muted loop playsinline ' + (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'controls' : 'autoplay') + ' preload="metadata" poster="../clips/' + clip[0] + '.jpg">' +
+        '<source src="../clips/' + clip[0] + '.webm" type="video/webm"><source src="../clips/' + clip[0] + '.mp4" type="video/mp4"></video>' +
+        '<figcaption><b>In play</b>' + esc(clip[1]) + '</figcaption></figure>';
+    }
 
     h += '<h2 id="builds">Builds</h2><div class="grid g2">';
     c.builds.forEach(function (b) {

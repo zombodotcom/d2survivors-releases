@@ -159,3 +159,9 @@ details .tw { margin-top: 8px; }
 .hit { animation: hit 1.6s ease-out; }
 @keyframes hit { from { box-shadow: 0 0 0 2px var(--gold), 0 0 24px rgba(212,173,98,.5); } }
 footer { color: var(--dim); font-size: 13px; padding: 30px 0 0; margin-top: 40px; border-top: 1px solid var(--line); }
+
+/* gameplay clip on class pages */
+.clip { margin: 0 0 8px; overflow: hidden; }
+.clip video { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; background: #000; }
+.clip figcaption { padding: 8px 12px 10px; font-size: 14px; color: var(--dim); }
+.clip figcaption b { margin-right: 6px; color: var(--gold2, #e8c070); }

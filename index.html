@@ -109,6 +109,17 @@
   .shots img { width: 100%; height: 100%; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
   @media (max-width: 700px) { .shots { grid-template-columns: 1fr; } }
 
+  /* gameplay clips: muted loops that play like GIFs */
+  .clip { margin: 0; overflow: hidden; }
+  .clip video { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; background: #000; }
+  .clip figcaption { padding: 10px 14px 12px; font-size: 14px; color: var(--dim); }
+  .clip figcaption b { font: 700 15px Cinzel, serif; color: var(--gold2); margin-right: 6px; }
+  .clip.big { margin-bottom: 14px; }
+  .clip.big figcaption { font-size: 15px; }
+  .clips { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 900px) { .clips { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .clips { grid-template-columns: 1fr; } .clip figcaption { padding: 8px 12px 10px; } }
+
   /* steps */
   .step { padding: 20px; }
   .step .num { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
@@ -141,6 +152,7 @@
 <body>
 <nav><div class="wrap">
   <b>D2 Survivors</b>
+  <a class="opt" href="#gameplay">Gameplay</a>
   <a class="opt" href="#features">Features</a>
   <a class="opt" href="#classes">Classes</a>
   <a href="#start">Get started</a>
@@ -168,6 +180,62 @@
 </div></div>
 
 <div class="wrap">
+
+<section id="gameplay">
+  <h2>Gameplay</h2>
+  <p class="sub">Real captures from the game: hundreds of monsters at once, skills that cast themselves.</p>
+  <figure class="frame clip big">
+    <video autoplay muted loop playsinline preload="auto" poster="clips/sorceress.jpg" aria-label="Sorceress: Frozen Orb, Blizzard and Static Field melt a 450-monster horde in Act I.">
+      <source src="clips/sorceress.webm" type="video/webm">
+      <source src="clips/sorceress.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Sorceress</b>Frozen Orb, Blizzard and Static Field melt a 450-monster horde in Act I.</figcaption>
+  </figure>
+  <div class="clips">
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/levelup.jpg" aria-label="Level-up cards: Each level deals three cards: a new skill or a rank-up. The run pauses while you pick.">
+      <source src="clips/levelup.webm" type="video/webm">
+      <source src="clips/levelup.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Level-up cards</b>Each level deals three cards: a new skill or a rank-up. The run pauses while you pick.</figcaption>
+  </figure>
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/paladin.jpg" aria-label="Paladin: Blessed Hammers spiral out from a Hammerdin under Concentration.">
+      <source src="clips/paladin.webm" type="video/webm">
+      <source src="clips/paladin.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Paladin</b>Blessed Hammers spiral out from a Hammerdin under Concentration.</figcaption>
+  </figure>
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/necromancer.jpg" aria-label="Necromancer: Bone Spear, Teeth and Corpse Explosion chain through the Act III jungle.">
+      <source src="clips/necromancer.webm" type="video/webm">
+      <source src="clips/necromancer.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Necromancer</b>Bone Spear, Teeth and Corpse Explosion chain through the Act III jungle.</figcaption>
+  </figure>
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/druid.jpg" aria-label="Druid: Tornado and Hurricane tear through a pack in Act IV.">
+      <source src="clips/druid.webm" type="video/webm">
+      <source src="clips/druid.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Druid</b>Tornado and Hurricane tear through a pack in Act IV.</figcaption>
+  </figure>
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/amazon.jpg" aria-label="Amazon: Multiple Shot and Strafe rain arrows into a swarm in Act I.">
+      <source src="clips/amazon.webm" type="video/webm">
+      <source src="clips/amazon.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Amazon</b>Multiple Shot and Strafe rain arrows into a swarm in Act I.</figcaption>
+  </figure>
+  <figure class="frame clip">
+    <video muted loop playsinline preload="none" poster="clips/barbarian.jpg" aria-label="Barbarian: A Whirlwind Barbarian buried in a 400-monster horde in the Act V snow.">
+      <source src="clips/barbarian.webm" type="video/webm">
+      <source src="clips/barbarian.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Barbarian</b>A Whirlwind Barbarian buried in a 400-monster horde in the Act V snow.</figcaption>
+  </figure>
+  </div>
+</section>
 
 <section id="features">
   <h2>Features</h2>
@@ -327,6 +395,21 @@
       if (top) top.insertAdjacentHTML("beforeend", '<span class="latest">LATEST</span>');
     })
     .catch(() => {});
+</script>
+<script>
+  // Gameplay clips: the grid ones load and play only while on screen.
+  (() => {
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const vids = [...document.querySelectorAll("#gameplay video")];
+    if (calm) { vids.forEach(v => { v.pause(); v.removeAttribute("autoplay"); v.controls = true; }); return; }
+    if (!("IntersectionObserver" in window)) { vids.forEach(v => { v.preload = "metadata"; v.controls = true; }); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) { if (v.preload === "none") v.preload = "auto"; v.play().catch(() => { v.controls = true; }); }
+      else v.pause();
+    }), {threshold: 0.35});
+    vids.forEach(v => io.observe(v));
+  })();
 </script>
 </body>
 </html>
