@@ -329,8 +329,8 @@
 
       '<h2 id="run">A run</h2>' +
       '<p>Pick a class and one of its builds. You only move: your skills cast themselves at the nearest monsters. ' +
-      'A run goes through five acts. Each act\'s boss comes at <b>' + mmss(r.boss_secs) + '</b>, with ' + r.boss_life_x + ' times her D2 life. ' +
-      'Kill her and the next act starts a few seconds later. After Baal you win the run, and can keep going in <a href="#endless">Endless</a>.</p>' +
+      'A run goes through five acts. Each act\'s boss comes at <b>' + mmss(r.boss_secs) + '</b>, with ' + r.boss_life_x + ' times its D2 life. ' +
+      'Kill it and the next act starts a few seconds later. After Baal you win the run, and can keep going in <a href="#endless">Endless</a>.</p>' +
       '<p>New monster kinds join each act as the clock runs (see <a href="acts.html">Acts</a>). Super-uniques and set-piece events break up the waves before each boss.</p>' +
 
       '<h2 id="leveling">Leveling</h2>' +
@@ -356,8 +356,8 @@
       '<div class="tw" style="max-width:340px"><table><thead><tr><th class="n">D2 required level</th><th class="n">Opens at level</th></tr></thead><tbody>' + unlock + '</tbody></table></div>' +
 
       '<h2 id="bosses">Boss rewards</h2>' +
-      '<p>An act boss gives three times her experience, refills your life, and deals a reward hand: each card raises a skill you have by <b>' + r.boss_levels +
-      ' levels</b> (up to ' + r.max_skill + '). She always drops an item for the <a href="armory.html">Armory</a>.</p>' +
+      '<p>An act boss gives three times its experience, refills your life, and deals a reward hand: each card raises a skill you have by <b>' + r.boss_levels +
+      ' levels</b> (up to ' + r.max_skill + '). It always drops an item for the <a href="armory.html">Armory</a>.</p>' +
 
       '<h2 id="loot">Gold, chests and shrines</h2>' +
       '<p>Kills drop gold now and then (' + r.gold_chance + '% of them). Gold opens <a href="items.html#chests">chests</a>, each dealing a hand of ' + r.item_hand +
@@ -572,7 +572,7 @@
     d.acts.forEach(function (a, i) {
       h += '<h2 id="act-' + (i + 1) + '">' + esc(a.name) + '</h2><div class="frame act">' +
         '<div class="boss">' + esc(a.boss) + '</div><p class="dim">Comes at ' + mmss(r.boss_secs) + ', D2 level ' + a.boss_level + ', with ' + r.boss_life_x +
-        ' times her D2 life. ' + (a.boss_spells ? 'Casts ' + a.boss_spells + ' kinds of spell besides her blows.' : (a.boss === 'Diablo' ? 'Fights with his own seven skills.' : 'Fights hand to hand.')) +
+        ' times its D2 life. ' + (a.boss_spells ? 'Casts ' + a.boss_spells + ' kinds of spell besides its blows.' : (a.boss === 'Diablo' ? 'Fights with his own seven skills.' : 'Fights hand to hand.')) +
         ' Always drops an Armory item of level ' + a.armory_levels[0] + '-' + (a.armory_levels[1] > 900 ? 'any' : a.armory_levels[1]) + '.</p>' +
         '<div class="grid g2"><div><h3>Monsters</h3><div class="tw"><table><thead><tr><th>Monster</th><th class="n">Level</th><th class="n">Joins at</th></tr></thead><tbody>' +
         a.roster.map(function (mo) { return '<tr><td>' + esc(mo.name) + '</td><td class="n">' + mo.level + '</td><td class="n">' + mmss(mo.from_secs) + '</td></tr>'; }).join('') +
