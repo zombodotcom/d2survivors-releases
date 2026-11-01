@@ -4,30 +4,100 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Controls - D2 Survivors wiki</title>
-<meta name="description" content="Keyboard and gamepad controls for D2 Survivors.">
+<meta name="description" content="Keyboard, mouse and gamepad controls for D2 Survivors: both modes, Classic casting, the item filter and the Guide.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="wiki.css">
+<style>
+  .clip > img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; background: #000; }
+</style>
 </head>
 <body data-page="text">
 <main>
 <h1>Controls</h1>
-<p class="lead">You only move: skills cast themselves. Keyboard and gamepad work at the same time.</p>
-<h2 id="keyboard">In a run</h2>
-<div class="tw"><table><thead><tr><th>Keyboard</th><th>Gamepad</th><th>Does</th></tr></thead><tbody>
-<tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows</td><td>Left stick, D-pad</td><td>Move</td></tr>
-<tr><td><kbd>1</kbd>-<kbd>4</kbd> or click</td><td></td><td>Pick a level-up card</td></tr>
-<tr><td><kbd>R</kbd></td><td>RB</td><td>Deal the cards again (reroll), if you have rerolls</td></tr>
-<tr><td><kbd>C</kbd></td><td>Select</td><td>Character sheet</td></tr>
-<tr><td><kbd>T</kbd> / <kbd>I</kbd></td><td>Y / X</td><td>Talents / Armory (class screen, Esc menu)</td></tr>
-<tr><td><kbd>Esc</kbd></td><td>Start</td><td>Pause menu and options</td></tr>
-<tr><td><kbd>Tab</kbd></td><td>LB</td><td>Minimap</td></tr>
-<tr><td><kbd>N</kbd></td><td></td><td>Damage numbers on or off</td></tr>
-<tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>RT / LT</td><td>Zoom</td></tr>
-<tr><td><kbd>M</kbd></td><td></td><td>Mute</td></tr>
-<tr><td><kbd>F3</kbd></td><td></td><td>Performance lines on screen</td></tr>
+<p class="lead">Keyboard, mouse and gamepad all work at the same time. In the game, <kbd>H</kbd> opens the Guide, whose first tab lists these controls for the mode you are in.</p>
+<h2 id="keyboard">Both modes</h2>
+<div class="tw"><table><thead><tr><th>Key</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows</td><td>Walk</td></tr>
+<tr><td>Left mouse held</td><td>Run toward the cursor</td></tr>
+<tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>Zoom in and out</td></tr>
+<tr><td><kbd>1</kbd>-<kbd>4</kbd></td><td>Drink from the belt</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>The menu; the run stands still</td></tr>
+<tr><td><kbd>H</kbd></td><td>The Guide: controls, runewords, runes and gems, orbs, and the mode's pages</td></tr>
+<tr><td><kbd>C</kbd></td><td>Character: stats and skills</td></tr>
+<tr><td><kbd>Tab</kbd></td><td>The map</td></tr>
+<tr><td><kbd>M</kbd></td><td>Mute</td></tr>
+<tr><td><kbd>N</kbd></td><td>Damage numbers on or off</td></tr>
+<tr><td><kbd>F3</kbd></td><td>Frame meter</td></tr>
 </tbody></table></div>
+<h2 id="survivors">Survivors</h2>
+<p>Skills cast themselves; you walk and pick cards. The run stands still while a hand of cards is up.</p>
+<div class="tw"><table><thead><tr><th>Key</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> or a click</td><td>Take a card</td></tr>
+<tr><td><kbd>R</kbd></td><td>Deal the cards again (a talent's reroll)</td></tr>
+<tr><td><kbd>Space</kbd></td><td>Take the recommended card</td></tr>
+<tr><td><kbd>G</kbd> by a cave</td><td>Go in; hold <kbd>G</kbd> in the cave to leave it</td></tr>
+<tr><td><kbd>T</kbd> / <kbd>I</kbd> in the menu</td><td>Talents / Armory</td></tr>
+</tbody></table></div>
+<h2 id="campaign">Campaign</h2>
+<p>Skills cast themselves, unless the character was made with <b>Classic casting</b> (a choice on the New Character screen).</p>
+<div class="tw"><table><thead><tr><th>Key</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>I</kbd></td><td>Inventory</td></tr>
+<tr><td><kbd>T</kbd></td><td>Skill tree and stat points</td></tr>
+<tr><td><kbd>E</kbd></td><td>Talk, pick up</td></tr>
+<tr><td><kbd>F</kbd> by the stash</td><td>Inventory and stash</td></tr>
+<tr><td><kbd>V</kbd> at a waypoint</td><td>Travel</td></tr>
+<tr><td><kbd>G</kbd> by a cave</td><td>Go in; hold <kbd>G</kbd> in the cave to leave it</td></tr>
+<tr><td><kbd>P</kbd></td><td>Town portal: walk in, and back out to where you were</td></tr>
+<tr><td><kbd>Enter</kbd> or a click</td><td>Inventory: wear, take or put an item</td></tr>
+<tr><td><kbd>Delete</kbd></td><td>Inventory: drop the item under the cursor</td></tr>
+</tbody></table></div>
+<h3 id="classic">Classic casting</h3>
+<div class="tw"><table><thead><tr><th>Key</th><th>Does</th></tr></thead><tbody>
+<tr><td>Left / right mouse</td><td>Cast the left / right skill</td></tr>
+<tr><td><kbd>Shift</kbd> held</td><td>Cast where you stand</td></tr>
+<tr><td><kbd>F1</kbd>-<kbd>F8</kbd> or the wheel</td><td>Pick a skill</td></tr>
+</tbody></table></div>
+<h3 id="filter">Item filter</h3>
+<p>The filter picks which items on the ground show their names, and marks the good ones with a border, a sound, a beam of light and a dot on the map. More on the <a href="campaign.html#filter">Campaign page</a>.</p>
+<div class="tw"><table><thead><tr><th>Key</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>Alt</kbd> held</td><td>Show the hidden items too</td></tr>
+<tr><td><kbd>L</kbd></td><td>Switch the filter off for now, and on again</td></tr>
+<tr><td>Options: Item Filter</td><td>Default, Strict, Custom or Off</td></tr>
+<tr><td>Options: Edit Item Filter</td><td>Opens <code>itemfilter.txt</code>; saved changes show at once</td></tr>
+</tbody></table></div>
+<h2 id="gamepad">Gamepad</h2>
+<div class="tw"><table><thead><tr><th>Button</th><th>Does</th></tr></thead><tbody>
+<tr><td>Left stick or D-pad</td><td>Walk</td></tr>
+<tr><td>Start</td><td>The menu (the Guide is on it)</td></tr>
+<tr><td>Select</td><td>Character</td></tr>
+<tr><td>A</td><td>Take, talk, pick up</td></tr>
+<tr><td>B</td><td>Back; drink a potion</td></tr>
+<tr><td>LB</td><td>The map</td></tr>
+<tr><td>L3</td><td>Go into a cave; held, leave it</td></tr>
+<tr><td>X / Y / B</td><td>Survivors: take a card, left to right</td></tr>
+<tr><td>RB</td><td>Survivors: deal the cards again</td></tr>
+<tr><td>R3</td><td>Survivors: take the recommended card</td></tr>
+<tr><td>X</td><td>Campaign: inventory</td></tr>
+<tr><td>Y</td><td>Campaign: skill tree</td></tr>
+<tr><td>RB</td><td>Campaign: town portal</td></tr>
+</tbody></table></div>
+<h2 id="guide">The Guide (H)</h2>
+<p>Tabs: Runewords, Runes &amp; Gems, Orbs, and Guide (these controls and the mode's own pages). It also shows drop chances.</p>
+<figure class="frame clip"><img src="../img/camp-guide.jpg" alt="The in-game Guide window" loading="lazy" decoding="async">
+  <figcaption><b>Guide</b>The Runewords tab, with the keys along the bottom.</figcaption></figure>
+<div class="tw"><table><thead><tr><th>Keyboard</th><th>Gamepad</th><th>Does</th></tr></thead><tbody>
+<tr><td><kbd>Q</kbd> / <kbd>E</kbd> or <kbd>1</kbd>-<kbd>4</kbd></td><td>LB / RB</td><td>Change tab</td></tr>
+<tr><td><kbd>Up</kbd> / <kbd>Down</kbd>, <kbd>W</kbd> / <kbd>S</kbd> or the wheel</td><td>D-pad</td><td>Pick a row</td></tr>
+<tr><td><kbd>Page Up</kbd> / <kbd>Page Down</kbd> or the wheel over the text</td><td>LT / RT</td><td>Scroll the text</td></tr>
+<tr><td><kbd>Left</kbd> / <kbd>Right</kbd>, <kbd>A</kbd> / <kbd>D</kbd></td><td>D-pad</td><td>Runewords: kind of item; Runes &amp; Gems: runes or gems</td></tr>
+<tr><td><kbd>F</kbd></td><td>X</td><td>Runewords: number of sockets</td></tr>
+<tr><td><kbd>R</kbd></td><td>Y</td><td>Mine: runewords you hold a rune of, or can make</td></tr>
+<tr><td><kbd>/</kbd> or a click on Search</td><td></td><td>Type a name or a rune</td></tr>
+<tr><td><kbd>H</kbd>, <kbd>Esc</kbd> or <kbd>Backspace</kbd></td><td>B</td><td>Close</td></tr>
+</tbody></table></div>
+<p>A runeword you can make right now is green.</p>
 <h2 id="review">Spell review (spells.bat)</h2>
 <p>The hero casts each skill over and over at a few dummies. Mark whether it looks right, as in Diablo (effect, animation, sound). Every mark is saved at once to <code>spell_review.txt</code> beside the exe; the next review starts at the first skill not yet marked. The file holds only the class, the skill, OK or WRONG and your note.</p>
 <div class="tw"><table><thead><tr><th>Keyboard</th><th>Gamepad</th><th>Does</th></tr></thead><tbody>

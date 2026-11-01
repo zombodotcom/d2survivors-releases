@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>D2 Survivors</title>
 <link rel="icon" href="img/icon.png">
-<meta name="description" content="A survivors-like in 3D with Diablo II's classes, skills and monsters, drawn from your own Diablo II: Resurrected install.">
+<meta name="description" content="Diablo II's classes, skills, monsters and items in two modes: a survivors-like run and a faster campaign through five acts and three difficulties, drawn from your own Diablo II: Resurrected install.">
 <meta property="og:title" content="D2 Survivors">
-<meta property="og:description" content="Vampire Survivors meets Diablo II: eight classes, five acts, D2R's own models and spell effects.">
+<meta property="og:description" content="Two modes: Survivors, where skills cast themselves at the horde, and Campaign, a faster Diablo II with towns, waypoints and real D2 loot. Eight classes, D2R's own models and spell effects.">
 <meta property="og:image" content="https://zombodotcom.github.io/d2survivors-releases/img/horde.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -71,11 +71,12 @@
     border-radius: 2px; pointer-events: none; }
 
   .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
   .g3 { grid-template-columns: repeat(3, 1fr); }
   .g4 { grid-template-columns: repeat(4, 1fr); }
   .g5 { grid-template-columns: repeat(5, 1fr); }
   @media (max-width: 900px) { .g4, .g5 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .g3, .g4 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
 
   /* features */
   .feat { padding: 20px; }
@@ -115,6 +116,23 @@
   .clip figcaption { padding: 10px 14px 12px; font-size: 14px; color: var(--dim); }
   .clip figcaption b { font: 700 15px Cinzel, serif; color: var(--gold2); margin-right: 6px; }
   .clip.big { margin-bottom: 14px; }
+  .clip > img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; background: #000; }
+
+  /* two modes */
+  .mode { overflow: hidden; }
+  .mode img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--line); }
+  .mode .body { padding: 18px 20px 20px; }
+  .mode h3 { margin: 0 0 6px; font: 700 22px Cinzel, serif; color: var(--gold2); }
+  .mode p { margin: 0 0 10px; color: var(--dim); font-size: 14.5px; }
+  .mode .how { margin: 0; font-size: 13px; color: var(--text); }
+
+  /* launcher */
+  .launch { display: grid; grid-template-columns: 5fr 6fr; gap: 24px; align-items: center; }
+  .launch img { border: 1px solid var(--line); border-radius: 4px; }
+  .launch ul { margin: 0; padding-left: 20px; color: var(--dim); font-size: 15px; }
+  .launch li { margin-bottom: 8px; }
+  .launch li b { color: var(--text); }
+  @media (max-width: 760px) { .launch { grid-template-columns: 1fr; } }
   .clip.big figcaption { font-size: 15px; }
   .clips { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 900px) { .clips { grid-template-columns: 1fr 1fr; } }
@@ -153,7 +171,8 @@
 <nav><div class="wrap">
   <b>D2 Survivors</b>
   <a class="opt" href="#gameplay">Gameplay</a>
-  <a class="opt" href="#features">Features</a>
+  <a class="opt" href="#modes">Modes</a>
+  <a class="opt" href="#campaign">Campaign</a>
   <a class="opt" href="#classes">Classes</a>
   <a href="#start">Get started</a>
   <a href="#updates">Updates</a>
@@ -162,8 +181,9 @@
 
 <div class="hero"><div class="wrap">
   <h1>D2 Survivors</h1>
-  <p class="tag">Vampire Survivors meets Diablo II. Your skills cast themselves at the horde:
-    move, pick upgrades, and survive five acts to Baal.</p>
+  <p class="tag">Diablo II's classes, skills and monsters in two modes. <b>Survivors</b>: your skills
+    cast themselves at the horde, five acts to Baal. <b>Campaign</b>: a faster Diablo II, with towns,
+    waypoints, real D2 loot, and Normal, Nightmare and Hell.</p>
   <div class="cta">
     <a class="btn" href="https://github.com/zombodotcom/d2survivors-releases/releases/latest/download/d2survivors.zip">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg>
@@ -237,8 +257,30 @@
   </div>
 </section>
 
+<section id="modes">
+  <h2>Two modes</h2>
+  <p class="sub">Pick one on the title screen: <b>Play</b> starts a Survivors run, <b>Campaign</b> opens your saved characters.</p>
+  <div class="grid g2">
+    <div class="frame mode">
+      <img src="img/horde.jpg" alt="A Survivors run: a horde of monsters around the hero" loading="lazy" decoding="async">
+      <div class="body"><h3>Survivors</h3>
+        <p>A run from Act I to Baal against hundreds of monsters at once. Your skills cast themselves;
+          you walk, pick level-up cards and spend gold on chests. Shards from each run buy talents,
+          and boss drops go to the Armory.</p>
+        <p class="how">Runs take minutes. Nothing carries over except talents, shards and the Armory.</p></div></div>
+    <div class="frame mode">
+      <img src="img/camp-chars.jpg" alt="The Characters screen of Campaign mode" loading="lazy" decoding="async">
+      <div class="body"><h3>Campaign</h3>
+        <p>A faster Diablo II. Make a character and take her through five acts with towns, D2's people,
+          waypoints and act bosses, then Nightmare and Hell. Real D2 items, stat and skill points,
+          the skill tree, runewords and the Cow Level.</p>
+        <p class="how">Saved characters, softcore or hardcore. Skills cast themselves, or pick Classic casting
+          when you make the character.</p></div></div>
+  </div>
+</section>
+
 <section id="features">
-  <h2>Features</h2>
+  <h2>Survivors mode</h2>
   <p class="sub">A full survivors run, built out of Diablo II's own pieces.</p>
   <div class="grid g3">
     <div class="frame feat">
@@ -248,7 +290,8 @@
     <div class="frame feat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="7" height="11" rx="1"/><rect x="14" y="5" width="7" height="11" rx="1"/><path d="M6.5 19h11"/></svg>
       <h3>Level-up cards</h3>
-      <p>Each level deals three cards: learn a skill, raise one, or take a passive. Reroll when the hand is bad.</p></div>
+      <p>Each level deals three cards: learn a skill, raise one, or take a passive. The run stands still while you pick.
+        The best card is marked Recommended, and Space takes it.</p></div>
     <div class="frame feat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18v10H3zM3 10l2-5h14l2 5M12 10v10M9 14h6"/></svg>
       <h3>Gold, chests, shrines</h3>
@@ -259,12 +302,94 @@
       <p>Bishibosh, Rakanishu, Griswold and friends show up before each act's boss. Night falls when the boss comes.</p></div>
     <div class="frame feat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="13" r="2"/><circle cx="18" cy="13" r="2"/><circle cx="12" cy="20" r="2"/><path d="M11 7l-4 4M13 7l4 4M7 15l4 3.5M17 15l-4 3.5"/></svg>
-      <h3>Talent tree</h3>
-      <p>Shards earned in a run buy permanent talents per class between runs.</p></div>
+      <h3>Talents and the Armory</h3>
+      <p>Shards earned in a run buy permanent talents per class. Bosses drop uniques and set items for the Armory;
+        equip them between runs and see them on your hero's model.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h10l2 3v15H6zM9 9h6M9 13h6M9 17h4"/></svg>
+      <h3>Quests</h3>
+      <p>Two side goals per act: slay a named monster, clear a den, gather, or hold a ring. Each pays out a reward hand.</p></div>
+  </div>
+</section>
+
+<section id="campaign">
+  <h2>Campaign mode</h2>
+  <p class="sub">Diablo II's acts and items at a faster pace: no waves and no respawns, packs placed along the road, and a town in every act.</p>
+  <div class="grid g3">
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21V10l4-3 4 3v11M13 21V6l4-3 4 3v15M3 21h18M7 14v3M17 10v3"/></svg>
+      <h3>Towns and waypoints</h3>
+      <p>Each act has a walled town with D2's people: Akara, Charsi, Gheed, Fara, Ormus, Malah and the rest.
+        D2R's waypoints reach every act. Only the town is safe.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 6 6 1-4.5 4 1 6.5L12 16l-5.5 3.5 1-6.5L3 9l6-1z"/></svg>
+      <h3>Normal, Nightmare, Hell</h3>
+      <p>Act bosses leave a portal and can be farmed. Beating Baal opens Nightmare, then Hell, with D2's monster
+        numbers and resist penalties.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a6 6 0 016 6v12H6V9a6 6 0 016-6zM9 21v-4h6v4M9.5 10h.01M14.5 10h.01"/></svg>
+      <h3>Softcore and hardcore</h3>
+      <p>Characters save on their own. In softcore, death sends you back to the act's town and costs some experience
+        on Nightmare and Hell. A hardcore character has one life.</p></div>
     <div class="frame feat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
-      <h3>The Armory</h3>
-      <p>Bosses drop uniques and set items. Equip them between runs and see them on your hero's model.</p></div>
+      <h3>Real D2 items</h3>
+      <p>Monsters drop from D2's treasure classes: magic, rare, set and unique items with real affixes, sockets and
+        ethereal. Gems, runes and D2's runewords. Uniques and sets drop four times as often.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/></svg>
+      <h3>Inventory, stash and belt</h3>
+      <p>A 10x8 inventory with a paperdoll, a shared 10x10 stash and a potion belt on 1-4. Worn gear shows on your
+        hero, and tooltips compare with what you wear.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="13" r="2"/><circle cx="18" cy="13" r="2"/><circle cx="12" cy="20" r="2"/><path d="M11 7l-4 4M13 7l4 4M7 15l4 3.5M17 15l-4 3.5"/></svg>
+      <h3>Stats and the skill tree</h3>
+      <p>Each level gives 5 stat points and 1 skill point. The skill tree is your class's real three tabs, and quests
+        pay D2's bonus skill points.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.7 2.5 1.8c0 2.4-5 1.4-5 4 0 1 1 1.7 2.5 1.7s2.5-.6 2.5-1.6"/></svg>
+      <h3>Vendors and gambling</h3>
+      <p>Vendors sell D2's stock at D2's prices and buy back what you sold. Healers heal for free, smiths add sockets,
+        Akara resets your points, and Gheed gambles.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h10l2 3v15H6zM9 9h6M9 13h6M9 17h4"/></svg>
+      <h3>Quests</h3>
+      <p>Seven D2 quests, from the Den of Evil to the Rite of Passage. Some pay skill points; the others give a lasting
+        bonus you pick, and can swap later at the quest giver.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20c2-8 5-13 9-13s7 5 9 13zM9 20c0-3 1.3-5 3-5s3 2 3 5"/></svg>
+      <h3>Caves and dungeons</h3>
+      <p>A named pack guards each cave. Inside: chambers, tunnels, sleeping packs and a champion pack, and a rare or
+        better item for clearing it. The Catacombs are D2 mazes down to Andariel.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+      <h3>Item filter</h3>
+      <p>Default, Strict, Custom or Off. Good drops get a border, a sound, a light beam and a map dot. L switches the
+        filter off; hold Alt to see hidden items. Custom reads <code>itemfilter.txt</code>.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+      <h3>Crafting orbs</h3>
+      <p>Ten orbs that turn a white item magic or rare, reroll affixes or numbers, add an affix or a socket, or strip an
+        item back to white. Click an orb, then the item.</p></div>
+    <div class="frame feat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="12" rx="5" ry="8"/><path d="M12 6v12"/></svg>
+      <h3>Town portal and cows</h3>
+      <p>P opens a town portal (no scrolls) and the field waits as you left it. After Baal, the victory screen offers
+        the Secret Cow Level: Hell Bovines and the Cow King.</p></div>
+  </div>
+  <div class="clips" style="margin-top:14px">
+    <figure class="frame clip"><img src="img/camp-town.jpg" alt="Lut Gholein, the Act II town" loading="lazy" decoding="async">
+      <figcaption><b>Towns</b>Lut Gholein: walls, D2's people and the act's waypoint.</figcaption></figure>
+    <figure class="frame clip"><img src="img/camp-akara.jpg" alt="Talking to Akara in the Rogue Encampment" loading="lazy" decoding="async">
+      <figcaption><b>D2's people</b>Akara heals, sells potions and resets your points.</figcaption></figure>
+    <figure class="frame clip"><img src="img/camp-waypoints.jpg" alt="The waypoint list with a tab per act" loading="lazy" decoding="async">
+      <figcaption><b>Waypoints</b>D2R's waypoints, a tab per act. V travels.</figcaption></figure>
+    <figure class="frame clip"><img src="img/camp-filter.jpg" alt="Item names and light beams over drops after a fight" loading="lazy" decoding="async">
+      <figcaption><b>Loot</b>Filtered item names, beams over the good drops.</figcaption></figure>
+    <figure class="frame clip"><img src="img/camp-gamble.jpg" alt="Gambling at Gheed next to the inventory" loading="lazy" decoding="async">
+      <figcaption><b>Gambling</b>Gheed's list, next to the inventory and paperdoll.</figcaption></figure>
+    <figure class="frame clip"><img src="img/camp-skills.jpg" alt="A Paladin's stats and skill tree with a skill tooltip" loading="lazy" decoding="async">
+      <figcaption><b>Skill tree</b>Stat points and the class's three skill tabs.</figcaption></figure>
   </div>
 </section>
 
@@ -285,7 +410,8 @@
 
 <section id="acts">
   <h2>Five acts</h2>
-  <p class="sub">Each act has its own ground, props, music and monsters. After Baal: a victory screen, then Endless.</p>
+  <p class="sub">Each act has its own ground, props, music and monsters. In Survivors, Baal's victory screen leads to Endless;
+    in Campaign, to the next difficulty and the Cow Level.</p>
   <div class="grid g5">
     <div class="frame act"><div class="n">ACT I</div><div class="boss">Andariel</div><div class="where">The wilderness</div></div>
     <div class="frame act"><div class="n">ACT II</div><div class="boss">Duriel</div><div class="where">The desert</div></div>
@@ -307,6 +433,22 @@
   </div>
 </section>
 
+<section id="launcher">
+  <h2>The launcher</h2>
+  <p class="sub">Settings, updates and the Play button in one window.</p>
+  <div class="launch">
+    <img src="img/launcher.jpg" alt="The launcher's Graphics tab" width="960" height="800" loading="lazy" decoding="async">
+    <ul>
+      <li><b>Finds D2R by itself</b> on Battle.net or Steam, or browse to it.</li>
+      <li><b>Updates itself from this site's releases.</b> It checks when it starts and every 10 minutes while open;
+        Update downloads the new build, swaps the files and restarts. The game checks too, and Exit Game hands over to the launcher.</li>
+      <li><b>A dark gothic look.</b> With D2R installed it draws D2R's own frames and buttons, read from your install
+        and never copied; without it, the drawn look shown here.</li>
+      <li><b>Every setting in tabs:</b> Game, Display, Graphics, Audio, Gameplay, Controls, Extras.</li>
+    </ul>
+  </div>
+</section>
+
 <section id="start">
   <h2>Get started</h2>
   <p class="sub">The game reads its art from your Diablo II: Resurrected install. It ships no Blizzard files and never starts D2R or Battle.net.</p>
@@ -316,12 +458,14 @@
     <div class="frame step"><div class="num">2</div><h3>Run the launcher</h3>
       <p>Start <code>D2SurvivorsLauncher.exe</code>. It finds D2R on Battle.net or Steam by itself.</p></div>
     <div class="frame step"><div class="num">3</div><h3>Press Play</h3>
-      <p>Pick a class and a build. <code>README.txt</code> has the controls; gamepads work too.</p></div>
+      <p>Play starts a Survivors run; Campaign opens your characters. Press <b>H</b> in the game for the Guide and its
+        controls, or see the <a href="wiki/controls.html">controls page</a>. Gamepads work too.</p></div>
   </div>
   <div class="frame note">
     <b>Windows warning?</b> The first time, Windows may say it's an unknown app: <i>More info</i>, then <i>Run anyway</i>.<br>
     <b>D2R not found?</b> Run <code>check_d2r.bat</code> and send the <code>d2r_check.txt</code> it writes.<br>
-    <b>Updating:</b> unzip the new build over your old folder. Settings, shards, talents and the Armory are kept.
+    <b>Updating:</b> the launcher does it (or unzip the new build over your old folder). Campaign characters live in the
+    <code>saves</code> folder next to the game; updates never touch them, and settings, shards, talents and the Armory are kept too.
   </div>
 </section>
 
@@ -368,7 +512,7 @@
     : /\b(faster|smoother|stall|lag|memory|perf|fps|stutter)/i.test(l) ? "perf" : "new";
   const md = l => esc(l).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`(.+?)`/g, "<code>$1</code>");
 
-  fetch(API + "?per_page=20")
+  fetch(API + "?per_page=100")
     .then(r => r.ok ? r.json() : [])
     .then(list => {
       if (!list.length) return;

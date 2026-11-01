@@ -9,7 +9,7 @@
     ['ass', 'Assassin'], ['dru', 'Druid'], ['bar', 'Barbarian'], ['war', 'Warlock']
   ];
   var NAV = [
-    ['Start', [['index.html', 'Overview: a run'], ['controls.html', 'Controls'], ['faq.html', 'FAQ and troubleshooting']]],
+    ['Start', [['index.html', 'Survivors: a run'], ['campaign.html', 'Campaign mode'], ['controls.html', 'Controls'], ['faq.html', 'FAQ and troubleshooting']]],
     ['Classes', CLASSES.map(function (c) { return [c[0] + '.html', c[1]]; })],
     ['Reference', [
       ['skills.html', 'All skills'], ['items.html', 'Run items and chests'], ['shrines.html', 'Shrines'],
@@ -18,7 +18,19 @@
   ];
   // Text pages the search knows by their sections.
   var TOPICS = [
-    ['Controls: keyboard', 'controls.html#keyboard'], ['Controls: gamepad', 'controls.html#keyboard'],
+    ['Controls: keyboard', 'controls.html#keyboard'], ['Controls: gamepad', 'controls.html#gamepad'],
+    ['Controls: Survivors', 'controls.html#survivors'], ['Controls: Campaign', 'controls.html#campaign'],
+    ['Classic casting (mouse)', 'controls.html#classic'], ['The Guide (H)', 'controls.html#guide'],
+    ['Towns and townsfolk', 'campaign.html#towns'], ['Vendors, healers, smiths', 'campaign.html#towns'],
+    ['Gambling', 'campaign.html#towns'], ['Reset stats and skills (Akara)', 'campaign.html#towns'],
+    ['Waypoints', 'campaign.html#waypoints'], ['Nightmare and Hell', 'campaign.html#difficulty'],
+    ['Death, softcore and hardcore', 'campaign.html#death'], ['Saves', 'campaign.html#death'],
+    ['Campaign items, uniques, sets', 'campaign.html#items'], ['Runewords and sockets', 'campaign.html#items'],
+    ['Inventory, stash and belt', 'campaign.html#inventory'], ['Stat and skill points, skill tree', 'campaign.html#points'],
+    ['Classic casting and mana', 'campaign.html#points'], ['Campaign quests', 'campaign.html#quests'],
+    ['Caves and the Catacombs', 'campaign.html#caves'], ['Crafting orbs', 'campaign.html#orbs'],
+    ['Item filter, itemfilter.txt', 'campaign.html#filter'], ['Town portal', 'campaign.html#portal'],
+    ['Secret Cow Level, Moo Moo Farm', 'campaign.html#cows'], ['Campaign saves folder', 'faq.html#saves'],
     ['Spell review keys (spells.bat)', 'controls.html#review'],
     ['Steam edition of D2R', 'faq.html#steam'], ['check_d2r.bat and d2r_check.txt', 'faq.html#steam'],
     ['D2R not found', 'faq.html#notfound'], ['Windows warning: unknown app', 'faq.html#smartscreen'],
@@ -304,8 +316,9 @@
     var unlock = r.unlock.map(function (u) { return '<tr><td class="n">' + u[0] + '</td><td class="n">' + u[1] + '</td></tr>'; }).join('');
     m.innerHTML =
       '<h1>D2 Survivors wiki</h1>' +
-      '<p class="lead">How a run works, what every class and skill does in this game, and where the items, shrines and bosses come in. ' +
-      'Skills here are not D2\'s exactly: they cast themselves, and the numbers are this game\'s.</p>' +
+      '<p class="lead">How a Survivors run works (<b>Play</b> on the title screen), what every class and skill does in it, and where the items, shrines and bosses come in. ' +
+      'Skills here are not D2\'s exactly: they cast themselves, and the numbers are this game\'s. ' +
+      'For the other mode, a faster Diablo II with towns and real D2 items, see <a href="campaign.html">Campaign mode</a>.</p>' +
       '<div class="grid g4" style="margin-bottom:8px">' +
       CLASSES.map(function (c) {
         return '<a class="frame box" style="text-decoration:none;padding:0;overflow:hidden" href="' + c[0] + '.html">' +
@@ -329,7 +342,8 @@
 
       '<h2 id="cards">Level-up cards</h2>' +
       '<ul class="plain">' +
-      '<li>Each level deals <b>' + r.hand + ' cards</b> (one more with the Insight talent). The game pauses while they are up. Pick one with <kbd>1</kbd>-<kbd>4</kbd> or a click.</li>' +
+      '<li>Each level deals <b>' + r.hand + ' cards</b> (one more with the Insight talent). The game pauses while they are up. Pick one with its number key (<kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>) or a click.</li>' +
+      '<li>The best card in each hand is marked <b>Recommended</b>; <kbd>Space</kbd> takes it. The Auto-Pick Cards option can take it for you.</li>' +
       '<li>A card either learns a new skill or raises one you have by a level, up to level <b>' + r.max_skill + '</b>. There are no free skill points.</li>' +
       '<li>Cards only offer your build\'s skills. "All Skills" offers every skill of the class.</li>' +
       '<li>While you can learn a new skill, one is always in the hand.</li>' +

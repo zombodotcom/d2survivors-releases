@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ and troubleshooting - D2 Survivors wiki</title>
-<meta name="description" content="Steam, check_d2r.bat, the Windows warning, perf.log, video memory and updating.">
+<meta name="description" content="Steam, check_d2r.bat, the Windows warning, perf.log, video memory, updating, Campaign saves and the item filter.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,8 +28,12 @@
 <h2 id="smartscreen">Windows warns about an unknown app</h2>
 <p>The first time, Windows may say it protected your PC. Click <b>More info</b>, then <b>Run anyway</b>. The game isn't signed, so Windows doesn't know it yet.</p>
 <h2 id="update">Updating</h2>
-<p>The launcher checks for a new build each time it starts, and shows its own build in the top right corner. When there is one, a bar says <b>Update available</b>: press <b>Update</b>, and it downloads the build, swaps its files and restarts. Close the game first.</p>
-<p>Or download the new zip and unzip it over the folder. Either way your settings, progress, logs and spell review marks are kept.</p>
+<p>The launcher checks for a new build when it starts and every 10 minutes while it is open. When there is one, a bar says <b>Update available</b>: press <b>Update</b>, and it downloads the build, swaps its files and restarts. Close the game first. The game checks every 10 minutes too and says so on the title screen and in the Esc menu; <b>Exit Game</b> then opens the launcher to install it.</p>
+<p>Or download the new zip and unzip it over the folder. Either way your Campaign characters, settings, progress, item filter, logs and spell review marks are kept.</p>
+<h2 id="saves">Where are my Campaign characters?</h2>
+<p>In the <code>saves</code> folder next to the game. They save on their own as you play, and from the Esc menu. Updates never touch the folder; to move your characters to another PC, copy it.</p>
+<h2 id="filter">How do I change the item filter?</h2>
+<p>In Options, <b>Item Filter</b> picks Default, Strict, Custom or Off. <b>Edit Item Filter</b> opens <code>itemfilter.txt</code> beside the exe; it is the Custom filter, and saved changes show in the game at once. A line the game can't read shows a message instead of breaking the filter. See the <a href="campaign.html#filter">Campaign page</a>.</p>
 <h2 id="perf">It runs slowly: perf.log</h2>
 <p>Turn on <b>Show performance</b> in the options, or press <kbd>F3</kbd> in a run. The game then writes <code>perf.log</code> beside the exe: frame times and video memory, a line each second. Try lower settings in the launcher, and send <code>perf.log</code> with <code>log.txt</code> if it stays slow.</p>
 <h2 id="vram">Video memory</h2>
@@ -39,7 +43,9 @@
 <h2 id="files">Files beside the exe</h2>
 <div class="tw"><table><tbody>
 <tr><td class="nw"><code>settings.toml</code></td><td>Your settings</td></tr>
-<tr><td class="nw"><code>progress.toml</code></td><td>Shards, talents, Armory, acts reached</td></tr>
+<tr><td class="nw"><code>progress.toml</code></td><td>Survivors: shards, talents, Armory, acts reached</td></tr>
+<tr><td class="nw"><code>saves</code></td><td>Campaign characters and the shared stashes</td></tr>
+<tr><td class="nw"><code>itemfilter.txt</code></td><td>Your Custom item filter</td></tr>
 <tr><td class="nw"><code>log.txt</code></td><td>The game's log</td></tr>
 <tr><td class="nw"><code>perf.log</code></td><td>Frame times and video memory (with Show performance on)</td></tr>
 <tr><td class="nw"><code>spell_review.txt</code></td><td>Spell review marks</td></tr>
