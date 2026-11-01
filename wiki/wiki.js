@@ -29,7 +29,7 @@
     ['Inventory, stash and belt', 'campaign.html#inventory'], ['Stat and skill points, skill tree', 'campaign.html#points'],
     ['Classic casting and mana', 'campaign.html#points'], ['Campaign quests', 'campaign.html#quests'],
     ['Caves', 'campaign.html#caves'], ["Lairs: the Catacombs, Tal Rasha's Tomb", 'campaign.html#lairs'],
-    ['Andariel and Duriel, last waypoints', 'campaign.html#lairs'], ['Charms and the charm grid', 'campaign.html#inventory'], ['Crafting orbs', 'campaign.html#orbs'], ['Rune farms: the Countess, the Forgotten Tower', 'campaign.html#runefarms'], ['Hellforge, Hephasto', 'campaign.html#runefarms'], ['Rune upgrade and downgrade', 'campaign.html#inventory'],
+    ['Andariel and Duriel, last waypoints', 'campaign.html#lairs'], ['Charms and the charm grid', 'campaign.html#inventory'], ['Crafting orbs', 'campaign.html#orbs'], ['Rune farms: the Countess, the Forgotten Tower', 'campaign.html#runefarms'], ['Hellforge, Hephasto', 'campaign.html#runefarms'], ['Rune upgrade and downgrade', 'campaign.html#inventory'], ['Rifts, Rift Stones, Rift Altar, Rift Guardian', 'campaign.html#rifts'],
     ['Item filter, itemfilter.txt', 'campaign.html#filter'], ['Town portal', 'campaign.html#portal'],
     ['Secret Cow Level, Moo Moo Farm', 'campaign.html#cows'], ['Cow portal and New herd', 'campaign.html#cows'], ['Campaign saves folder', 'faq.html#saves'],
     ['Spell review keys (spells.bat)', 'controls.html#review'],
