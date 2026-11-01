@@ -12,7 +12,7 @@
     ['Start', [['index.html', 'Survivors: a run'], ['campaign.html', 'Campaign mode'], ['controls.html', 'Controls'], ['faq.html', 'FAQ and troubleshooting']]],
     ['Classes', CLASSES.map(function (c) { return [c[0] + '.html', c[1]]; })],
     ['Reference', [
-      ['skills.html', 'All skills'], ['items.html', 'Run items and chests'], ['shrines.html', 'Shrines'],
+      ['skills.html', 'All skills'], ['items.html', 'Run items and chests (Survivors)'], ['mods.html', 'Item mods (Campaign)'], ['shrines.html', 'Shrines'],
       ['acts.html', 'Acts, bosses, super-uniques'], ['talents.html', 'Talent tree'], ['armory.html', 'Armory']
     ]]
   ];
@@ -42,7 +42,11 @@
     ['Rerolls', 'index.html#cards'], ['Boss rewards', 'index.html#bosses'], ['Endless mode', 'index.html#endless'],
     ['Gold and chests', 'items.html#chests'], ['Magic find and chest rarity', 'items.html#chests'],
     ['Shards', 'talents.html#shards'], ['Super-unique mods', 'acts.html#mods'], ['Events before the boss', 'acts.html#events'],
-    ['Champions and uniques', 'acts.html#elites']
+    ['Champions and uniques', 'acts.html#elites'],
+    ['Magic prefixes and suffixes (Campaign)', 'mods.html'], ['Rare items: how many affixes', 'mods.html#rules'],
+    ['Affix level (alvl), item level', 'mods.html#rules'], ['Automagic: class item +skills', 'mods.html?t=automagic'],
+    ['Uniques (Campaign stats)', 'mods.html?t=uniques'], ['Set items and set bonuses', 'mods.html?t=set_items'],
+    ['Sets: partial and full bonuses', 'mods.html?t=sets'], ['Runewords list', 'mods.html?t=runewords']
   ];
 
   var page = document.body.getAttribute('data-page') || '';
@@ -162,6 +166,22 @@
     d.armory.forEach(function (g) {
       add(g.name, 'Armory ' + (g.set ? 'set item' : 'unique') + ', ' + g.base, 'armory.html?q=' + encodeURIComponent(g.name));
     });
+    var im = d.item_mods;
+    if (im) {
+      var modHref = function (t, q) { return 'mods.html?t=' + t + '&q=' + encodeURIComponent(q); };
+      [['prefixes', 'Magic prefix'], ['suffixes', 'Magic suffix'], ['automagic', 'Automagic']].forEach(function (k) {
+        var once = {};
+        im[k[0]].forEach(function (a) {
+          if (once[a.name]) return;
+          once[a.name] = 1;
+          add(a.name, k[1] + ': ' + a.stats.join(', '), modHref(k[0], a.name));
+        });
+      });
+      im.uniques.forEach(function (u) { add(u.name, 'Unique ' + u.base + ', level ' + u.level, modHref('uniques', u.name)); });
+      im.set_items.forEach(function (u) { add(u.name, 'Set item (' + u.set + '), ' + u.base, modHref('set_items', u.name)); });
+      im.sets.forEach(function (st) { add(st.name, 'Set: ' + st.members.join(', '), modHref('sets', st.name)); });
+    }
+    (d.runewords || []).forEach(function (r) { add(r.name, 'Runeword: ' + r.runes.join(' '), 'mods.html?t=runewords&q=' + encodeURIComponent(r.name)); });
     return ix;
   }
 
@@ -529,8 +549,9 @@
     function pct(w) { var t = w.reduce(function (a, b) { return a + b; }, 0); return w.map(function (x) { return (100 * x / t).toFixed(1) + '%'; }); }
     var a = pct(r.rarity_weights), b = pct(r.rarity_weights_free);
     var names = ['Normal', 'Magic', 'Rare', 'Unique'];
-    var h = '<h1>Run items and chests</h1><p class="lead">Run items are D2\'s gems, charms, jewels, rings, amulets and uniques, as passive stats for one run. ' +
-      'Each copy adds its stats again; none levels up. They are gone when the run ends.</p>';
+    var h = '<h1>Run items and chests (Survivors)</h1><p class="lead"><b>Survivors mode only.</b> Run items are D2\'s gems, charms, jewels, rings, amulets and uniques, as passive stats for one run. ' +
+      'Each copy adds its stats again; none levels up. They are gone when the run ends. ' +
+      'Campaign mode drops real D2 items instead: its affixes, uniques, sets and runewords are on <a href="mods.html">Item mods (Campaign)</a>.</p>';
     h += '<h2 id="chests">Gold and chests</h2><ul class="plain">' +
       '<li>' + r.gold_chance + '% of kills drop gold. Gold flies to you within ' + r.magnet_yards + ' yards (more with Greed and some items).</li>' +
       '<li>' + r.chests + ' chests lie on the field (more with magic find). Opening one costs gold, more each time; it deals ' + r.item_hand + ' items and you keep one.</li>' +
@@ -711,11 +732,166 @@
     redraw();
   };
 
+  // Campaign item mods: affixes grouped by stat, uniques, sets, runewords.
+  R.mods = function (d, m) {
+    var im = d.item_mods;
+    var kname = {};
+    im.kinds.forEach(function (k) { kname[k.code] = k.name; });
+    var TABS = [
+      ['prefixes', 'Prefixes', im.prefixes.length], ['suffixes', 'Suffixes', im.suffixes.length],
+      ['automagic', 'Automagic', im.automagic.length], ['uniques', 'Uniques', im.uniques.length],
+      ['set_items', 'Set items', im.set_items.length], ['sets', 'Sets', im.sets.length],
+      ['runewords', 'Runewords', d.runewords.length]
+    ];
+    var h = '<h1>Item mods (Campaign)</h1><p class="lead"><b>Campaign mode only.</b> Every magic prefix and suffix, automatic mod, unique, set item, set and runeword ' +
+      'the campaign can roll, read from the game\'s own D2 tables. Stat lines are written as the item tooltip writes them; a range reads <code>(low-high)</code>. ' +
+      'A stat "Based on Character Level" is shown from level 1 to 99. Survivors runs use other items: see <a href="items.html">Run items and chests</a>.</p>';
+    h += '<div class="frame note" id="rules"><b>Magic items</b> get a prefix, a suffix, or both. ' +
+      '<b>Rare items</b> get a prefix and a suffix, then more tries for 4 to 6 in all: at most 3 prefixes and 3 suffixes (2 and 2 on jewels), ' +
+      'never two affixes of the same group, and only affixes marked Rare below.<br>' +
+      '<b>Affix level.</b> An affix can roll only if its level is at most the item\'s affix level, and the affix level is not above the affix\'s max level (if it has one). ' +
+      'Take the item level, raised to the base\'s level if lower (99 at most). On bases with a magic level (wands, staves, orbs, scepters, circlets and a few others) the affix level is that plus the magic level. ' +
+      'Otherwise it is the item level minus half the base\'s level, or 2 x item level - 99 once the item level reaches 99 minus half the base\'s level.<br>' +
+      '<b>Mana.</b> While spells auto-cast there is no mana, so affixes that give mana (marked <i>mana</i>) do not roll; with classic casting they do.<br>' +
+      '<b>Orbs</b> reroll or add affixes from these same tables, with the same rules: see <a href="campaign.html#orbs">Crafting orbs</a>. ' +
+      'Red mods from a Hellforge Ember or an Abyssal Shard are not affixes: see <a href="campaign.html#redmods">Red mods</a>.</div>';
+    h += '<div class="tabs" id="tabs">' + TABS.map(function (t) {
+      return '<button type="button" data-t="' + t[0] + '">' + esc(t[1]) + ' <span class="dim">' + t[2] + '</span></button>';
+    }).join('') + '</div>';
+    h += '<div class="filters"><input type="search" id="f-q" placeholder="Filter by name or stat">' +
+      '<select id="f-k">' + options(im.kinds.map(function (k) { return [k.code, k.name]; }), 'Every item type') + '</select>' +
+      '<select id="f-r"><option value="">Magic and rare</option><option value="r">Can be on rares</option></select>' +
+      '<span class="count" id="f-n"></span></div><div id="view"></div>';
+    m.innerHTML = h;
+    var f = { q: m.querySelector('#f-q'), k: m.querySelector('#f-k'), r: m.querySelector('#f-r') };
+    var view = m.querySelector('#view');
+    var tab = qs('t');
+    if (!TABS.some(function (t) { return t[0] === tab; })) tab = 'prefixes';
+    f.q.value = qs('q');
+
+    function lines(l) { return l.length ? l.map(esc).join('<br>') : '<span class="dim">none</span>'; }
+    function words(l) { return l.join(' ').toLowerCase(); }
+    function skel(s) { return String(s || '').replace(/\(\d+-\d+\)|\d+/g, '#'); }
+    function goesOn(a) {
+      var s = esc(a.allowed.join(', '));
+      if (a.excluded.length) s += '<br><small class="dim">not ' + esc(a.excluded.join(', ')) + '</small>';
+      if (a.class) s += '<br><small class="dim">' + esc(a.class) + ' items</small>';
+      return s;
+    }
+    function affixes(list) {
+      var q = f.q.value.trim().toLowerCase(), k = f.k.value, rare = f.r.value === 'r' && tab !== 'automagic';
+      var rows = list.filter(function (a) {
+        return (!k || a.kinds.indexOf(k) >= 0) && (!rare || a.rare) &&
+          (!q || (a.name + ' ' + words(a.stats)).toLowerCase().indexOf(q) >= 0);
+      });
+      var groups = {}, order = [];
+      rows.forEach(function (a) {
+        var g = skel(a.stats[0]);
+        if (!groups[g]) { groups[g] = []; order.push(g); }
+        groups[g].push(a);
+      });
+      function key(g) { return g.replace(/[^A-Za-z ]+/g, '').trim().toLowerCase(); }
+      order.sort(function (a, b) { var x = key(a), y = key(b); return x < y ? -1 : x > y ? 1 : 0; });
+      var auto = tab === 'automagic';
+      view.innerHTML = order.length ? order.map(function (g) {
+        var as = groups[g].slice().sort(function (a, b) { return a.level - b.level || (a.name < b.name ? -1 : 1); });
+        return '<h3 style="margin-top:16px">' + esc(g || 'Other') + '</h3><div class="tw"><table><thead><tr><th>Name</th><th>Stats</th>' +
+          '<th class="n">Level</th><th class="n">Max</th><th class="n">Req</th>' + (auto ? '' : '<th>Rare</th>') + '<th>' + (auto ? 'Rolls on' : 'Goes on') + '</th></tr></thead><tbody>' +
+          as.map(function (a) {
+            var on = auto ? esc(a.kinds.map(function (c) { return kname[c] || c; }).join(', ')) : goesOn(a);
+            return '<tr><td class="q-Magic nw">' + esc(a.name) + '</td><td>' + lines(a.stats) + (a.mana ? ' <small class="dim">mana</small>' : '') + '</td>' +
+              '<td class="n">' + a.level + '</td><td class="n">' + (a.max_level || '<span class="dim">-</span>') + '</td><td class="n">' + a.req_level + '</td>' +
+              (auto ? '' : '<td>' + (a.rare ? 'Yes' : '<span class="dim">No</span>') + '</td>') + '<td>' + on + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }).join('') : '<p class="dim">Nothing matches.</p>';
+      return rows.length;
+    }
+    function specialCols(set) {
+      var c = [
+        { h: 'Item', v: function (u) { return u.name; }, f: function (u) {
+          return '<span class="' + (set ? 'q-Set' : 'q-Unique') + '">' + esc(u.name) + '</span>' + (set ? '<br><small class="dim">' + esc(u.set) + '</small>' : '');
+        } },
+        { h: 'Base', v: function (u) { return u.base; }, f: function (u) { return esc(u.base) + '<br><small class="dim">' + esc(kname[u.kind] || u.kind) + '</small>'; } },
+        { h: 'Level', n: 1, v: function (u) { return u.level; }, f: function (u) { return u.level; } },
+        { h: 'Req', n: 1, v: function (u) { return u.req_level; }, f: function (u) { return u.req_level; } },
+        { h: 'Stats', v: function (u) { return u.stats.length; }, f: function (u) { return lines(u.stats); } }
+      ];
+      if (set) c.push({ h: 'Set bonus on the item', v: function (u) { return u.partial.length; }, f: function (u) {
+        return u.partial.length ? u.partial.map(function (p) { return '<small class="dim">' + esc(p.when) + ':</small><br>' + p.stats.map(esc).join('<br>'); }).join('<br>') : '<span class="dim">none</span>';
+      } });
+      return c;
+    }
+    function specials(list, set) {
+      var q = f.q.value.trim().toLowerCase(), k = f.k.value;
+      return sortTable(view, specialCols(set), function () {
+        return list.filter(function (u) {
+          var p = u.partial.map(function (x) { return words(x.stats); }).join(' ');
+          return (!k || u.kind === k) && (!q || (u.name + ' ' + u.set + ' ' + u.base + ' ' + words(u.stats) + ' ' + p).toLowerCase().indexOf(q) >= 0);
+        });
+      }, 2)();
+    }
+    function sets() {
+      var q = f.q.value.trim().toLowerCase();
+      var rows = im.sets.filter(function (s) {
+        var p = s.partial.map(function (x) { return words(x.stats); }).join(' ');
+        return !q || (s.name + ' ' + s.members.join(' ') + ' ' + p + ' ' + words(s.full)).toLowerCase().indexOf(q) >= 0;
+      });
+      view.innerHTML = '<div class="tw"><table><thead><tr><th>Set</th><th>Members</th><th>Partial set</th><th>Full set</th></tr></thead><tbody>' +
+        rows.map(function (s) {
+          return '<tr id="set-' + slug(s.name) + '"><td class="q-Set">' + esc(s.name) + '</td><td>' + s.members.map(function (n) {
+            return '<a href="mods.html?t=set_items&amp;q=' + encodeURIComponent(n) + '">' + esc(n) + '</a>';
+          }).join('<br>') + '</td><td>' + (s.partial.length ? s.partial.map(function (p) {
+            return '<small class="dim">' + p.worn + ' items:</small><br>' + p.stats.map(esc).join('<br>');
+          }).join('<br>') : '<span class="dim">none</span>') + '</td><td>' + lines(s.full) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+      return rows.length;
+    }
+    function runewords() {
+      var q = f.q.value.trim().toLowerCase();
+      var cols = [
+        { h: 'Runeword', v: function (r) { return r.name; }, f: function (r) { return '<span class="q-Unique">' + esc(r.name) + '</span>'; } },
+        { h: 'Runes', v: function (r) { return r.runes.join(' '); }, f: function (r) { return esc(r.runes.join(' ')); } },
+        { h: 'Sockets', n: 1, v: function (r) { return r.sockets; }, f: function (r) { return r.sockets; } },
+        { h: 'Level', n: 1, v: function (r) { return r.level; }, f: function (r) { return r.level; } },
+        { h: 'Goes in', v: function (r) { return r.allowed.join(); }, f: function (r) { return goesOn({ allowed: r.allowed, excluded: r.excluded }); } },
+        { h: 'Stats', v: function (r) { return r.stats.length; }, f: function (r) { return lines(r.stats); } }
+      ];
+      return sortTable(view, cols, function () {
+        return d.runewords.filter(function (r) {
+          return !q || (r.name + ' ' + r.runes.join(' ') + ' ' + r.allowed.join(' ') + ' ' + words(r.stats)).toLowerCase().indexOf(q) >= 0;
+        });
+      }, 3)();
+    }
+    var NOUN = { prefixes: 'prefixes', suffixes: 'suffixes', automagic: 'automatic mods', uniques: 'uniques', set_items: 'set items', sets: 'sets', runewords: 'runewords' };
+    function redraw() {
+      var affix = tab === 'prefixes' || tab === 'suffixes' || tab === 'automagic';
+      f.k.style.display = tab === 'sets' || tab === 'runewords' ? 'none' : '';
+      f.r.style.display = affix && tab !== 'automagic' ? '' : 'none';
+      var n = affix ? affixes(im[tab]) : tab === 'uniques' ? specials(im.uniques, false) : tab === 'set_items' ? specials(im.set_items, true) :
+        tab === 'sets' ? sets() : runewords();
+      m.querySelector('#f-n').textContent = n + ' ' + NOUN[tab];
+      if (tab === 'automagic') view.insertAdjacentHTML('afterbegin', '<p class="dim">A class item always rolls one row of the group its base names: ' +
+        'Amazon bows, spears and javelins, Sorceress orbs, Paladin shields, Necromancer heads, Warlock grimoires. Staves, wands, scepters, orbs, heads, Barbarian helms, ' +
+        'Druid pelts, claws and daggers also roll D2\'s +1 to +3 to their class\'s skills.</p>');
+      m.querySelectorAll('#tabs button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-t') === tab); });
+    }
+    m.querySelectorAll('#tabs button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        tab = b.getAttribute('data-t');
+        try { history.replaceState(null, '', 'mods.html?t=' + tab); } catch (e) { /* not served */ }
+        f.q.value = '';
+        redraw();
+      });
+    });
+    Object.keys(f).forEach(function (k) { f[k].addEventListener('input', redraw); });
+    redraw();
+  };
+
   // ---------- start ----------
   shell();
   var main = document.querySelector('main');
   var host = document.getElementById('content') || main;
-  var render = { overview: R.overview, 'class': R.cls, skills: R.skills, items: R.items, shrines: R.shrines, acts: R.acts, talents: R.talents, armory: R.armory }[page];
+  var render = { overview: R.overview, 'class': R.cls, skills: R.skills, items: R.items, shrines: R.shrines, acts: R.acts, talents: R.talents, armory: R.armory, mods: R.mods }[page];
   data().then(function (d) {
     var b = document.getElementById('buildname');
     if (b && d.build && d.build !== 'dev') b.textContent = 'Data from build ' + d.build + '.';
