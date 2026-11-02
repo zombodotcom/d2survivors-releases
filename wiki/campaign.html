@@ -43,7 +43,7 @@ the act's boss waits at the end. The numbers on this page are the game's own.</p
 <tr><td class="nw">Gambler</td><td>Gheed, Elzix, Alkor, Jamella, Anya</td><td>D2's gamble list: unseen items for gold, cheaper at low levels</td></tr>
 <tr><td class="nw">Reset</td><td>Akara</td><td>Gives back all stat and skill points: 300 gold per character level</td></tr>
 </tbody></table></div>
-<p>The stash stands in town too: <kbd>F</kbd> beside it opens the inventory and stash. Alkor also sells Thawing and Antidote potions.</p>
+<p>The stash stands in town too: <kbd>F</kbd> beside it opens the inventory and stash; <kbd>B</kbd> opens them anywhere. Alkor also sells Thawing and Antidote potions.</p>
 <div class="grid g2">
   <figure class="frame clip"><img src="../img/camp-akara.jpg" alt="Akara's menu" loading="lazy" decoding="async">
     <figcaption><b>Akara</b>Heal, buy potions, or reset stats and skills.</figcaption></figure>
@@ -104,6 +104,8 @@ the act's boss waits at the end. The numbers on this page are the game's own.</p
 <li>Charms from an older save go in the tab's top left. Ones that overlap, sit off the grid or repeat a unique are moved to a free cell or the bag, so nothing is lost or stuck.</li>
 <li><b>Rare charms</b>: about one magic small, large or grand charm in twelve drops rare instead (more with magic find). It has 3 or 4 mods, never two of one kind, and a yellow name.</li>
 <li>The shared stash is 10x10, for all your characters of the same kind (softcore or hardcore).</li>
+<li><kbd>B</kbd> (pad R3) opens the inventory with the stash beside it anywhere: in an act, a cave, the cow farm, a rift or town. Items move both ways, as at the stash.</li>
+<li><kbd>Ctrl</kbd>+click (pad R3) on an item in the bag or the Charms tab sends it to the stash's first free spot, with the stash open or not. Worn items stay. If it does not fit, <i>The stash is full</i> and the item stays. <kbd>Ctrl</kbd>+click on an item in the stash brings it back to the bag.</li>
 <li>Potions you pick up fill the belt (its rows depend on the belt you wear). Drink with <kbd>1</kbd>-<kbd>4</kbd> or pad B.</li>
 <li>Runes and gems stack in their own tabs under the bag (<kbd>R</kbd> or pad RB goes round the orbs, runes, gems and charms).</li>
 <li><b>Rune upgrades</b>, without a Horadric Cube: on the Runes tab, point at a rune and press <kbd>U</kbd> (pad Y, or the Up button). It follows D2R's cube recipe: 3 of El to Ort make the next rune; Thul to Lem take 3 and a gem; Pul and up take 2 and a gem. The gem comes from the Gems tab, and the tooltip names it. <kbd>J</kbd> (pad LB, or the Down button) breaks one rune into 2 of the rune below.</li>
@@ -171,14 +173,34 @@ the act's boss waits at the end. The numbers on this page are the game's own.</p
 </tbody></table></div>
 
 <h3 id="redmods">Red mods</h3>
-<p>A Hellforge Ember adds one red mod to a weapon, armor, jewelry or a charm, or a new one in place of the one it has. A charm's red mods are its own: +1 to all skills, 5-10% faster cast rate, 5-10% faster run/walk, 8-15% magic find, +15-30 life or 15-30% extra gold. A corrupted charm still works in the Charms tab; rare charms can be corrupted too. An Abyssal Shard adds a second one of another kind. Red mods show in red under the item's other stats; a Corrupted item ends in a red <b>Corrupted</b> line. The Abyssal Shard drops from kills and chests like the other orbs, in every act and difficulty, about half as often as the Ember.</p>
+<p>A Hellforge Ember adds one red mod to a weapon, armor, jewelry or a charm, or a new one in place of the one it has. Each kind of item has its own red mods, below. Their numbers grow with the item level: a low item rolls near the bottom of the range, and from item level 85 a roll lands in the top half. Mods marked <i>(rare)</i> come up less often. An Abyssal Shard adds a second one of another kind. Red mods show in red under the item's other stats; a Corrupted item ends in a red <b>Corrupted</b> line. The Abyssal Shard drops from kills and chests like the other orbs, in every act and difficulty, about half as often as the Ember.</p>
+<p>A charm's red mods are its own: +1 to all skills, 5-10% faster cast rate, 5-10% faster run/walk, 8-15% magic find, +15-30 life or 15-30% extra gold. A corrupted charm still works in the Charms tab; rare charms can be corrupted too.</p>
 <div class="tw"><table><thead><tr><th>Red mod</th><th>Range</th><th>Goes on</th></tr></thead><tbody>
-<tr><td class="nw">+1 projectile</td><td>+1, rarely +2 (one time in 8)</td><td>Bows, crossbows, throwing weapons, staves, wands and orbs</td></tr>
-<tr><td class="nw">Chance to cast on a critical strike</td><td>20-40%</td><td>Weapons</td></tr>
-<tr><td class="nw">Chance to cast on striking</td><td>5-15%</td><td>Weapons</td></tr>
+<tr><td class="nw">+1 projectile</td><td>+1; +2 one time in 8</td><td>Bows, crossbows, throwing weapons, staves, wands and orbs</td></tr>
+<tr><td>Chance to cast a skill on a critical strike</td><td>20-40%</td><td>Weapons</td></tr>
+<tr><td>Chance to cast a skill on striking</td><td>5-15%</td><td>Weapons</td></tr>
 <tr><td class="nw">Deadly Strike</td><td>5-15%, +1% per 10 item levels, 30% at most</td><td>Weapons</td></tr>
-<tr><td class="nw">Chance to cast when struck</td><td>8-20%</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
-<tr><td class="nw">Chance to cast when you kill an enemy</td><td>10-25%</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
+<tr><td class="nw">+ to all skills</td><td>+1</td><td>Staves, wands, orbs and sceptres</td></tr>
+<tr><td class="nw">+ to all skills</td><td>+1</td><td>Helms, body armor, shields, gloves, boots and belts (rare)</td></tr>
+<tr><td class="nw">+ to all skills</td><td>+1</td><td>Amulets and rings</td></tr>
+<tr><td class="nw">Increased attack speed</td><td>10-30%</td><td>Weapons</td></tr>
+<tr><td class="nw">Increased attack speed</td><td>10-20%</td><td>Gloves</td></tr>
+<tr><td class="nw">Chance of crushing blow</td><td>5-15%</td><td>Weapons</td></tr>
+<tr><td class="nw">Chance of open wounds</td><td>10-25%</td><td>Weapons</td></tr>
+<tr><td class="nw">Enhanced damage</td><td>20-60%</td><td>Weapons</td></tr>
+<tr><td class="nw">Life stolen per hit</td><td>3-8%</td><td>Weapons</td></tr>
+<tr><td class="nw">Faster cast rate</td><td>10-20%</td><td>Weapons</td></tr>
+<tr><td class="nw">Faster cast rate</td><td>5-15%</td><td>Helms, body armor, shields, gloves, belts, amulets and rings</td></tr>
+<tr><td>Less enemy fire, cold, lightning or poison resistance</td><td>-5-15% (one element each)</td><td>Weapons</td></tr>
+<tr><td>Chance to cast a skill when struck</td><td>8-20%</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
+<tr><td>Chance to cast a skill when you kill an enemy</td><td>10-25%</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
+<tr><td class="nw">+ to all resistances</td><td>+5-15</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
+<tr><td>+ to maximum fire, cold, lightning or poison resistance</td><td>+1-3% (one element each)</td><td>Helms, body armor, shields, gloves, boots and belts (rare)</td></tr>
+<tr><td class="nw">Faster run/walk</td><td>5-15%</td><td>Body armor, boots and belts</td></tr>
+<tr><td class="nw">Increased maximum life</td><td>3-8%</td><td>Helms, body armor, shields and belts</td></tr>
+<tr><td class="nw">+ to life</td><td>+20-40</td><td>Amulets and rings</td></tr>
+<tr><td class="nw">Damage reduced</td><td>3-8%</td><td>Helms, body armor, shields and belts</td></tr>
+<tr><td>Better chance of getting magic items</td><td>10-25%</td><td>Armor, helms, shields, gloves, boots, belts, amulets and rings</td></tr>
 </tbody></table></div>
 <p>The skill cast is one of 28 that go off at once: Fire Bolt, Charged Bolt, Ice Bolt, Frost Nova, Static Field, Ice Blast, Fire Ball, Nova, Glacial Spike, Blizzard, Meteor, Frozen Orb, Lightning, Chain Lightning, Teeth, Bone Spear, Bone Spirit, Poison Nova, Amplify Damage, Lower Resist, Holy Bolt, Fist of the Heavens, Twister, Tornado, Firestorm, Volcano, Molten Boulder and Flame Wave. Its level is the item level / 5, +1 to 3, from 1 to 20.</p>
 
