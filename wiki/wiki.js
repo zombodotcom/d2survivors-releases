@@ -46,7 +46,8 @@
     ['Magic prefixes and suffixes (Campaign)', 'mods.html'], ['Rare items: how many affixes', 'mods.html#rules'],
     ['Affix level (alvl), item level', 'mods.html#rules'], ['Automagic: class item +skills', 'mods.html?t=automagic'],
     ['Uniques (Campaign stats)', 'mods.html?t=uniques'], ['Set items and set bonuses', 'mods.html?t=set_items'],
-    ['Sets: partial and full bonuses', 'mods.html?t=sets'], ['Runewords list', 'mods.html?t=runewords']
+    ['Sets: partial and full bonuses', 'mods.html?t=sets'], ['Runewords list', 'mods.html?t=runewords'],
+    ['Charm rolls and tiers', 'mods.html?t=charms'], ['Item level and mod ranges in tooltips', 'mods.html#rules']
   ];
 
   var page = document.body.getAttribute('data-page') || '';
@@ -741,7 +742,7 @@
       ['prefixes', 'Prefixes', im.prefixes.length], ['suffixes', 'Suffixes', im.suffixes.length],
       ['automagic', 'Automagic', im.automagic.length], ['uniques', 'Uniques', im.uniques.length],
       ['set_items', 'Set items', im.set_items.length], ['sets', 'Sets', im.sets.length],
-      ['runewords', 'Runewords', d.runewords.length]
+      ['runewords', 'Runewords', d.runewords.length], ['charms', 'Charms', im.charms.stats.length]
     ];
     var h = '<h1>Item mods (Campaign)</h1><p class="lead"><b>Campaign mode only.</b> Every magic prefix and suffix, automatic mod, unique, set item, set and runeword ' +
       'the campaign can roll, read from the game\'s own D2 tables. Stat lines are written as the item tooltip writes them; a range reads <code>(low-high)</code>. ' +
@@ -754,7 +755,9 @@
       'Otherwise it is the item level minus half the base\'s level, or 2 x item level - 99 once the item level reaches 99 minus half the base\'s level.<br>' +
       '<b>Mana.</b> While spells auto-cast there is no mana, so affixes that give mana (marked <i>mana</i>) do not roll; with classic casting they do.<br>' +
       '<b>Orbs</b> reroll or add affixes from these same tables, with the same rules: see <a href="campaign.html#orbs">Crafting orbs</a>. ' +
-      'Red mods from a Hellforge Ember or an Abyssal Shard are not affixes: see <a href="campaign.html#redmods">Red mods</a>.</div>';
+      'Red mods from a Hellforge Ember or an Abyssal Shard are not affixes: see <a href="campaign.html#redmods">Red mods</a>.<br>' +
+      '<b>In the game.</b> An item tooltip shows the item level and, in square brackets after a stat, what that stat could have rolled: <code>+12 to Life [11-15]</code>. ' +
+      'Base defense and red mods have no brackets.</div>';
     h += '<div class="tabs" id="tabs">' + TABS.map(function (t) {
       return '<button type="button" data-t="' + t[0] + '">' + esc(t[1]) + ' <span class="dim">' + t[2] + '</span></button>';
     }).join('') + '</div>';
@@ -862,13 +865,50 @@
         });
       }, 3)();
     }
-    var NOUN = { prefixes: 'prefixes', suffixes: 'suffixes', automagic: 'automatic mods', uniques: 'uniques', set_items: 'set items', sets: 'sets', runewords: 'runewords' };
+    function charms() {
+      var q = f.q.value.trim().toLowerCase(), c = im.charms;
+      var sizes = [2, 1, 0];
+      function stats(s) {
+        var found = s.tiers.some(function (ts) { return ts.some(function (t) { return (t.name + ' ' + words(t.stats)).toLowerCase().indexOf(q) >= 0; }); });
+        return !q || s.stat.toLowerCase().indexOf(q) >= 0 || found;
+      }
+      function cell(ts) {
+        if (!ts.length) return '<span class="dim">-</span>';
+        return ts.map(function (t) {
+          var at = t.max_level ? t.level + ' to ' + t.max_level : t.level;
+          return '<span class="nw">' + esc(t.value) + ' <small class="dim">lvl ' + at + ' &middot; w' + t.freq + '</small></span>';
+        }).join('<br>');
+      }
+      function table(prefix, title) {
+        var rows = c.stats.filter(function (s) { return s.prefix === prefix && stats(s); });
+        if (!rows.length) return '';
+        return '<h3 style="margin-top:16px">' + title + '</h3><div class="tw"><table><thead><tr><th>Stat</th>' +
+          sizes.map(function (i) { return '<th>' + esc(c.sizes[i].name) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+          rows.map(function (s) {
+            return '<tr><td class="nw">' + esc(s.stat) + (s.mana ? ' <small class="dim">mana</small>' : '') + '</td>' +
+              sizes.map(function (i) { return '<td>' + cell(s.tiers[i]) + '</td>'; }).join('') + '</tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+      view.innerHTML = '<p>A magic charm has a prefix, a suffix or both. A rare charm has 3 or 4 affixes, at most 2 prefixes and 2 suffixes, never two from one group. ' +
+        'About 8% of magic charms drop rare, up to 16% with magic find. An <b>Orb of Ascension</b> makes a magic charm rare, keeping its affixes and adding one; ' +
+        'a <b>Horadric Orb</b> adds another up to the cap. <a href="campaign.html#orbs">All orbs</a>.</p>' +
+        '<p>Each cell lists the tiers of a stat, lowest first. <b>lvl</b> is the affix level a tier needs: reaching it adds the tier to what can roll, and lower tiers can still roll unless a tier says where it stops. ' +
+        '<b>w</b> is its weight, how often it comes up among what can roll. Tiers that need an affix level past 99 never roll and are not listed.</p>' +
+        '<h3 style="margin-top:16px">Affix level by item level</h3><div class="tw"><table><thead><tr><th class="n">Item level</th>' +
+        sizes.map(function (i) { return '<th class="n">' + esc(c.sizes[i].name) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        c.levels.map(function (l) {
+          return '<tr><td class="n">' + l.item + '</td>' + sizes.map(function (i) { return '<td class="n">' + l.affix[i] + '</td>'; }).join('') + '</tr>';
+        }).join('') + '</tbody></table></div>' +
+        table(true, 'Prefixes') + table(false, 'Suffixes');
+      return c.stats.filter(stats).length;
+    }
+    var NOUN = { prefixes: 'prefixes', suffixes: 'suffixes', automagic: 'automatic mods', uniques: 'uniques', set_items: 'set items', sets: 'sets', runewords: 'runewords', charms: 'charm stats' };
     function redraw() {
       var affix = tab === 'prefixes' || tab === 'suffixes' || tab === 'automagic';
-      f.k.style.display = tab === 'sets' || tab === 'runewords' ? 'none' : '';
+      f.k.style.display = tab === 'sets' || tab === 'runewords' || tab === 'charms' ? 'none' : '';
       f.r.style.display = affix && tab !== 'automagic' ? '' : 'none';
       var n = affix ? affixes(im[tab]) : tab === 'uniques' ? specials(im.uniques, false) : tab === 'set_items' ? specials(im.set_items, true) :
-        tab === 'sets' ? sets() : runewords();
+        tab === 'sets' ? sets() : tab === 'charms' ? charms() : runewords();
       m.querySelector('#f-n').textContent = n + ' ' + NOUN[tab];
       if (tab === 'automagic') view.insertAdjacentHTML('afterbegin', '<p class="dim">A class item always rolls one row of the group its base names: ' +
         'Amazon bows, spears and javelins, Sorceress orbs, Paladin shields, Necromancer heads, Warlock grimoires. Staves, wands, scepters, orbs, heads, Barbarian helms, ' +
